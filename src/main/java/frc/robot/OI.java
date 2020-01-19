@@ -16,7 +16,7 @@ public class OI {
     public OI() {
         driverController = new BobXboxController(0, 0.1, 0.1);
 
-        driverController.aButton.whenPressed(new SpinShooter(0.35));
+        driverController.aButton.whenPressed(new SpinShooter(1));
         driverController.aButton.whenReleased(new SpinShooter(0.0));
     }
 
