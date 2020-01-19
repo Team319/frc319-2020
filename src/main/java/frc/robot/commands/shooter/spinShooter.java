@@ -12,23 +12,24 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class spinShooter extends CommandBase {
+public class SpinShooter extends CommandBase {
 
   private double shooterPercentage = 0.35;
-  public spinShooter() {
+  public SpinShooter(double setpoint) {
     addRequirements(Robot.shooter);
+    this.shooterPercentage = setpoint;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Robot.shooter.set(ControlMode.PercentOutput, shooterPercentage);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.shooter.set(ControlMode.PercentOutput, shooterPercentage);
   }
 
   // Called once the command ends or is interrupted.
