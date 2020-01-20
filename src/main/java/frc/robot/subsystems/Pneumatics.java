@@ -15,8 +15,6 @@ public class Pneumatics extends SubsystemBase {
 
   private Compressor compressor = new Compressor(0);
 
-  private DoubleSolenoid hoodSolenoid = new DoubleSolenoid(2, 3);
-
   /**
    * Creates a new Pneumatics.
    */
@@ -26,14 +24,6 @@ public class Pneumatics extends SubsystemBase {
 
   public void compressorRun() {
     compressor.setClosedLoopControl(true);
-  }
-
-  public void hoodExtend() {
-    this.hoodSolenoid.set(DoubleSolenoid.Value.kForward);
-  }
-
-  public void hoodRetract() {
-    this.hoodSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
   @Override
