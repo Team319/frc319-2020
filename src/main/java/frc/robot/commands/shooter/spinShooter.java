@@ -16,7 +16,7 @@ public class SpinShooter extends CommandBase {
   private ControlMode controlMode = ControlMode.PercentOutput;
   private double shooterSetpoint = 0.35;
 
-  public SpinShooter(double setpoint) {
+  public SpinShooter(ControlMode controlMode, double setpoint) {
     addRequirements(Robot.shooter);
     this.shooterSetpoint = setpoint;
     this.controlMode = controlMode;

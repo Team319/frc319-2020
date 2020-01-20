@@ -14,14 +14,14 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.models.BobTalonFX;
-import frc.robot.models.PheonixGains;
 import frc.robot.models.MotionParameters;
+import frc.robot.models.PhoenixGains;
 
 public class Shooter extends SubsystemBase {
-  private BobTalonFX shooterLead = new BobTalonFX(5);
-  private BobTalonFX shooterFollow = new BobTalonFX(6);
+  private BobTalonFX shooterLead = new BobTalonFX(7);
+  // private BobTalonFX shooterFollow = new BobTalonFX(6);
 
-  private final PheonixGains shooterGains = new PheonixGains(0, 0, 0, 0, 0, 0);
+  private final PhoenixGains shooterGains = new PhoenixGains(0, 0, 0, 0, 0, 0);
   private MotionParameters shooterMotionParameters = new MotionParameters(0, 0, shooterGains);
 
   /**
@@ -29,8 +29,8 @@ public class Shooter extends SubsystemBase {
    */
   public Shooter() {
 
-    this.shooterFollow.follow(shooterLead);
-    this.shooterFollow.setInverted(InvertType.OpposeMaster);
+    // this.shooterFollow.follow(shooterLead);
+    // this.shooterFollow.setInverted(InvertType.OpposeMaster);
     this.shooterLead.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     this.shooterLead.configClosedloopRamp(0.25);
     this.shooterLead.configMotionParameters(shooterMotionParameters);
