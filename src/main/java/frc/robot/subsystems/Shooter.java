@@ -41,7 +41,7 @@ public class Shooter extends SubsystemBase {
     return currentVelocity;
   }
 
-  public double getPossition() {
+  public double getPosition() {
     double currentPosition = this.shooterLead.getSelectedSensorPosition();
     return currentPosition;
   }
@@ -49,7 +49,7 @@ public class Shooter extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Shooter Velocity", this.getVelocity() / 2048 * 600);
-    SmartDashboard.putNumber("Shooter Possition", this.getPossition());
+    SmartDashboard.putNumber("Shooter Position", this.getPosition());
   }
 
   public void set(ControlMode controlMode, double setpoint) {
