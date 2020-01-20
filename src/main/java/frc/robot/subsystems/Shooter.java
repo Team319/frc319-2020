@@ -10,22 +10,30 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.models.BobTalonFX;
+import frc.robot.models.FXGains;
+import frc.robot.models.MotionParameters;
 
 public class Shooter extends SubsystemBase {
-  private TalonFX shooterLead = new TalonFX(5);
-  private TalonFX shooterFollow = new TalonFX(6);
+  private BobTalonFX shooterLead = new BobTalonFX(5);
+  private BobTalonFX shooterFollow = new BobTalonFX(6);
+
+  private final FXGains shooterGains = new FXGains(0, 0, 0, 0, 0, 0);
+  private MotionParameters shooterMotionParameters = new MotionParameters(0, 0, shooterGains);
 
   /**
    * Creates a new Shooter.
    */
   public Shooter() {
+
     this.shooterFollow.follow(shooterLead);
     this.shooterFollow.setInverted(InvertType.OpposeMaster);
     this.shooterLead.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    this.shooterLead.configClosedloopRamp(0.25);
+    this.shooterLead.configMotionParameters(shooterMotionParameters);
   }
 
   public double getShooterVelocity() {
