@@ -13,18 +13,20 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 public class SpinShooter extends CommandBase {
+  private ControlMode controlMode = ControlMode.PercentOutput;
+  private double shooterSetpoint = 0.35;
 
-  private double shooterPercentage = 0.35;
   public SpinShooter(double setpoint) {
     addRequirements(Robot.shooter);
-    this.shooterPercentage = setpoint;
+    this.shooterSetpoint = setpoint;
+    this.controlMode = controlMode;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.shooter.set(ControlMode.PercentOutput, shooterPercentage);
+    Robot.shooter.set(controlMode, shooterSetpoint);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

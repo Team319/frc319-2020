@@ -3,9 +3,9 @@ package frc.robot.models;
 public class MotionParameters {
 	private int _acceleration = 0;
 	private int _cruiseVelocity = 0;
-	private FXGains _gains = new FXGains(0, 0, 0, 0, 0, 0);
+	private PheonixGains _gains = new PheonixGains(0, 0, 0, 0, 0, 0);
 
-	public MotionParameters(int acceleration, int cruiseVelocity, FXGains gains) {
+	public MotionParameters(int acceleration, int cruiseVelocity, PheonixGains gains) {
 		_acceleration = acceleration;
 		_cruiseVelocity = cruiseVelocity;
 		_gains = gains;
@@ -14,7 +14,7 @@ public class MotionParameters {
 	public MotionParameters() {
 	}
 
-	public FXGains getGains() {
+	public PheonixGains getGains() {
 		return _gains;
 	}
 
@@ -26,7 +26,7 @@ public class MotionParameters {
 		return _cruiseVelocity;
 	}
 
-	public void setFXGains(FXGains gains) {
+	public void setFXGains(PheonixGains gains) {
 		_gains = gains;
 	}
 

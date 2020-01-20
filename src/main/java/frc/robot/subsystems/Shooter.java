@@ -14,14 +14,14 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.models.BobTalonFX;
-import frc.robot.models.FXGains;
+import frc.robot.models.PheonixGains;
 import frc.robot.models.MotionParameters;
 
 public class Shooter extends SubsystemBase {
   private BobTalonFX shooterLead = new BobTalonFX(5);
   private BobTalonFX shooterFollow = new BobTalonFX(6);
 
-  private final FXGains shooterGains = new FXGains(0, 0, 0, 0, 0, 0);
+  private final PheonixGains shooterGains = new PheonixGains(0, 0, 0, 0, 0, 0);
   private MotionParameters shooterMotionParameters = new MotionParameters(0, 0, shooterGains);
 
   /**
@@ -36,20 +36,20 @@ public class Shooter extends SubsystemBase {
     this.shooterLead.configMotionParameters(shooterMotionParameters);
   }
 
-  public double getShooterVelocity() {
+  public double getVelocity() {
     double currentVelocity = this.shooterLead.getSelectedSensorVelocity();
     return currentVelocity;
   }
 
-  public double getShooterPossition() {
-    double currentPossition = this.shooterLead.getSelectedSensorPosition();
-    return currentPossition;
+  public double getPossition() {
+    double currentPosition = this.shooterLead.getSelectedSensorPosition();
+    return currentPosition;
   }
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Shooter Velocity", this.getShooterVelocity() / 2048 * 600);
-    SmartDashboard.putNumber("Shooter Possition", this.getShooterPossition());
+    SmartDashboard.putNumber("Shooter Velocity", this.getVelocity() / 2048 * 600);
+    SmartDashboard.putNumber("Shooter Possition", this.getPossition());
   }
 
   public void set(ControlMode controlMode, double setpoint) {

@@ -53,7 +53,7 @@ public class BobTalonFX extends TalonFX {
         return eCode;
     }
 
-    public ErrorCode configPIDF(FXGains gains) {
+    public ErrorCode configPIDF(PheonixGains gains) {
         return this.configPIDF(gains.parameterSlot, gains.P, gains.I, gains.D, gains.F, gains.iZone);
     }
 
@@ -69,7 +69,7 @@ public class BobTalonFX extends TalonFX {
         this.configMotionCruiseVelocity(parameters.getCruiseVelocity());
     }
 
-    public ErrorCode setGains(FXGains gains) {
+    public ErrorCode setGains(PheonixGains gains) {
         return this.configPIDF(gains.parameterSlot, gains.P, gains.I, gains.D, gains.F, gains.iZone);
     }
 
