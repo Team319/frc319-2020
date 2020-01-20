@@ -5,13 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.SparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
@@ -25,18 +23,15 @@ public class Drivetrain extends SubsystemBase {
   public CANSparkMax leftFollow = new CANSparkMax(2, MotorType.kBrushless);
   public CANSparkMax rightFollow = new CANSparkMax(4, MotorType.kBrushless);
 
-
   public Drivetrain() {
-    
+
     setupFollowers();
 
     leftLead.setInverted(true);
     rightLead.setInverted(false);
 
-   
   }
 
- 
   private void setupFollowers() {
     leftFollow.follow(leftLead);
     rightFollow.follow(rightLead);
@@ -47,9 +42,9 @@ public class Drivetrain extends SubsystemBase {
     this.rightLead.set(right);
   }
 
-  //public void drive(DriveSignal driveSignal) {
- //   this.drive(driveSignal.getLeft(), driveSignal.getRight());
- // }
+  // public void drive(DriveSignal driveSignal) {
+  // this.drive(driveSignal.getLeft(), driveSignal.getRight());
+  // }
 
   @Override
   public void periodic() {
