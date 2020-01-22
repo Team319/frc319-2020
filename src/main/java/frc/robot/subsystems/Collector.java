@@ -22,6 +22,9 @@ public class Collector extends SubsystemBase {
   private final CANSparkMax collectorLead = new CANSparkMax(8, MotorType.kBrushless);
   private final BobTalonSRX collectorArm = new BobTalonSRX(9);
 
+  private int collectPosition = 0;
+  private int homePosition = 0;
+
   private final PhoenixGains collectorGains = new PhoenixGains(0, 0, 0, 0, 0, 0);
   private final MotionParameters collectorMotionParameters = new MotionParameters(0, 0, collectorGains);
 
@@ -46,5 +49,13 @@ public class Collector extends SubsystemBase {
 
   public void setCollectorArm(final ControlMode controlMode, final double setpoint) {
     collectorArm.set(controlMode, setpoint);
+  }
+
+  public int getCollectPosition(){
+    return collectPosition;
+  }
+
+  public int getHomePosition(){
+    return homePosition;
   }
 }
