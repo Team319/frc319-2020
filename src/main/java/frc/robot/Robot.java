@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
 
 /**
@@ -20,10 +21,13 @@ import frc.robot.subsystems.Shooter;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static Shooter shooter = new Shooter();
+
   public static OI oi;
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
+
+  public static final Drivetrain drivetrain = new Drivetrain();
+  public static final Shooter shooter = new Shooter();
 
   /**
    * This function is run when the robot is first started up and should be used
