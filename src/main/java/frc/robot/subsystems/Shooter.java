@@ -20,9 +20,9 @@ import frc.robot.models.PhoenixGains;
 
 public class Shooter extends SubsystemBase {
   private BobTalonFX shooterLead = new BobTalonFX(7);
-  // private BobTalonFX shooterFollow = new BobTalonFX(6);
+  private BobTalonFX shooterFollow = new BobTalonFX(6);
 
-  private final PhoenixGains shooterGains = new PhoenixGains(0, 0, 0, 0, 0, 0);
+  private final PhoenixGains shooterGains = new PhoenixGains(0, 0.05, 0.001, 0.7, 0.0472, 150);
   private MotionParameters shooterMotionParameters = new MotionParameters(0, 0, shooterGains);
 
   private DoubleSolenoid hoodSolenoid = new DoubleSolenoid(2, 3);
@@ -32,8 +32,8 @@ public class Shooter extends SubsystemBase {
    */
   public Shooter() {
 
-    // this.shooterFollow.follow(shooterLead);
-    // this.shooterFollow.setInverted(InvertType.OpposeMaster);
+    this.shooterFollow.follow(shooterLead);
+    this.shooterFollow.setInverted(InvertType.OpposeMaster);
     this.shooterLead.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     this.shooterLead.configClosedloopRamp(0.25);
     this.shooterLead.configMotionParameters(shooterMotionParameters);
@@ -59,8 +59,8 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Shooter Velocity", this.getVelocity() / 2048 * 600);
-    SmartDashboard.putNumber("Shooter Position", this.getPosition());
+    SmartDashboard.putNumber("Shooter Velocity", this.getVelocity());
+    SmartDashboard.putNumber("Shooter Velocity Text", this.getVelocity());
   }
 
   public void set(ControlMode controlMode, double setpoint) {
