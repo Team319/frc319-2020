@@ -12,7 +12,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.models.BobTalonFX;
 import frc.robot.models.MotionParameters;
@@ -24,8 +23,6 @@ public class Shooter extends SubsystemBase {
 
   private final PhoenixGains shooterGains = new PhoenixGains(0, 0, 0, 0, 0, 0);
   private MotionParameters shooterMotionParameters = new MotionParameters(0, 0, shooterGains);
-
-  private DoubleSolenoid hoodSolenoid = new DoubleSolenoid(2, 3);
 
   /**
    * Creates a new Shooter.
@@ -47,14 +44,6 @@ public class Shooter extends SubsystemBase {
   public double getPosition() {
     double currentPosition = this.shooterLead.getSelectedSensorPosition();
     return currentPosition;
-  }
-
-  public void hoodExtend() {
-    this.hoodSolenoid.set(DoubleSolenoid.Value.kForward);
-  }
-
-  public void hoodRetract() {
-    this.hoodSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
   @Override
