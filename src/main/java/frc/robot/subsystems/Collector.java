@@ -8,34 +8,28 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.models.BobTalonSRX;
-import frc.robot.models.MotionParameters;
-import frc.robot.models.PhoenixGains;
 
 public class Collector extends SubsystemBase {
   private final CANSparkMax collectorLead = new CANSparkMax(8, MotorType.kBrushless);
-  private final BobTalonSRX collectorArm = new BobTalonSRX(9);
-
-  private int collectPosition = 0;
-  private int homePosition = 0;
-
-  private final PhoenixGains collectorGains = new PhoenixGains(0, 0, 0, 0, 0, 0);
-  private final MotionParameters collectorMotionParameters = new MotionParameters(0, 0, collectorGains);
+  private DoubleSolenoid collectorSolenoid = new DoubleSolenoid(2, 3);
 
   /**
    * Creates a new Collector.
    */
   public Collector() {
+  }
 
-    this.collectorArm.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-    this.collectorArm.configClosedloopRamp(0.25);
-    this.collectorArm.configMotionParameters(collectorMotionParameters);
+  public void collectorExtend() {
+    this.collectorSolenoid.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void collectorRetract() {
+    this.collectorSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
   @Override
@@ -45,17 +39,5 @@ public class Collector extends SubsystemBase {
 
   public void setCollector(final ControlMode controlMode, final double setpoint) {
     collectorLead.set(setpoint);
-  }
-
-  public void setCollectorArm(final ControlMode controlMode, final double setpoint) {
-    collectorArm.set(controlMode, setpoint);
-  }
-
-  public int getCollectPosition(){
-    return collectPosition;
-  }
-
-  public int getHomePosition(){
-    return homePosition;
   }
 }

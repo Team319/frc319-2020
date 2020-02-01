@@ -25,7 +25,7 @@ public class Shooter extends SubsystemBase {
   private final PhoenixGains shooterGains = new PhoenixGains(0, 0, 0, 0, 0, 0);
   private MotionParameters shooterMotionParameters = new MotionParameters(0, 0, shooterGains);
 
-  private DoubleSolenoid hoodSolenoid = new DoubleSolenoid(2, 3);
+  private DoubleSolenoid hoodSolenoid = new DoubleSolenoid(0, 1);
 
   /**
    * Creates a new Shooter.
