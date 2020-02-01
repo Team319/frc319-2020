@@ -7,10 +7,14 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
+import frc.robot.models.DriveSignal;
+import frc.robot.utils.BobDriveHelper;
 
 public class Drivetrain extends SubsystemBase {
 
@@ -23,7 +27,11 @@ public class Drivetrain extends SubsystemBase {
   public CANSparkMax leftFollow = new CANSparkMax(2, MotorType.kBrushless);
   public CANSparkMax rightFollow = new CANSparkMax(4, MotorType.kBrushless);
 
+  BobDriveHelper helper;
+  private double quickTurnThreshold = 0.2;
+
   public Drivetrain() {
+    helper = new BobDriveHelper();
 
     setupFollowers();
 
@@ -42,12 +50,20 @@ public class Drivetrain extends SubsystemBase {
     this.rightLead.set(right);
   }
 
-  // public void drive(DriveSignal driveSignal) {
-  // this.drive(driveSignal.getLeft(), driveSignal.getRight());
-  // }
+  public void drive(ControlMode controlMode, DriveSignal driveSignal) {
+    this.drive(controlMode, driveSignal.getLeft(), driveSignal.getRight());
+  }
+
+  private void drive(ControlMode controlMode, double left, double right) {
+  }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    double rotateValue = Robot.oi.driverController.rightStick.getX();
+
+    double moveValue = -Robot.oi.driverController.leftStick.getY();
+    boolean quickTurn = (moveValue < quickTurnThreshold && moveValue > -quickTurnThreshold);
+    DriveSignal driveSignal = helper.cheesyDrive(moveValue, rotateValue, quickTurn, false);
+    this.drive(ControlMode.PercentOutput, driveSignal);
   }
 }
