@@ -24,13 +24,11 @@ import frc.robot.subsystems.Shooter;
 public class Robot extends TimedRobot {
   public static Shooter shooter = new Shooter();
   public static Collector collector = new Collector();
+  public static Drivetrain drivetrain = new Drivetrain();
   public static OI oi;
 
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
-
-  public static final Drivetrain drivetrain = new Drivetrain();
-  public static final Shooter shooter = new Shooter();
 
   /**
    * This function is run when the robot is first started up and should be used
