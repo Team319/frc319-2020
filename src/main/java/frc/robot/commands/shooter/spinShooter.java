@@ -14,7 +14,7 @@ import frc.robot.Robot;
 
 public class SpinShooter extends CommandBase {
   private ControlMode controlMode = ControlMode.PercentOutput;
-  private double shooterSetpoint = 0.35;
+  private double shooterSetpoint = 0.75;
 
   public SpinShooter(ControlMode controlMode, double setpoint) {
     addRequirements(Robot.shooter);

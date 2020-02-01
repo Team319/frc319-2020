@@ -13,7 +13,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 public class ShooterClosedLoop extends CommandBase {
-  double Velocity = 0;
+  double maxVelocity = -21666;
+  double percentage = 0.55;
 
   /**
    * Creates a new ShooterClosedLoop.
@@ -31,7 +32,7 @@ public class ShooterClosedLoop extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.shooter.set(ControlMode.Velocity, Velocity);
+    Robot.shooter.set(ControlMode.Velocity, maxVelocity * percentage);
   }
 
   // Called once the command ends or is interrupted.
