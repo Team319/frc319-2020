@@ -36,6 +36,10 @@ deploy {
         }
     }
 }
+   repositories {
+      jcenter()
+      maven { url "https://jitpack.io" }
+   }
 
 // Set this to true to enable desktop support.
 def includeDesktopSupport = false
@@ -46,6 +50,7 @@ dependencies {
     implementation wpi.deps.wpilib()
     nativeZip wpi.deps.wpilibJni(wpi.platforms.roborio)
     nativeDesktopZip wpi.deps.wpilibJni(wpi.platforms.desktop)
+    compile 'com.github.Team319:BobTrajectory:v2.1.0'
 
 
     implementation wpi.deps.vendor.java()
