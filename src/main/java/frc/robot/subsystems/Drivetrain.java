@@ -8,12 +8,12 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
+import frc.robot.models.BobTalonFX;
 import frc.robot.models.DriveSignal;
+import frc.robot.models.LeaderBobTalonFX;
 import frc.robot.utils.BobDriveHelper;
 
 public class Drivetrain extends SubsystemBase {
@@ -21,40 +21,37 @@ public class Drivetrain extends SubsystemBase {
   public static int DRIVE_PROFILE = 0;
   public static int ROTATION_PROFILE = 1;
 
-  public CANSparkMax leftLead = new CANSparkMax(1, MotorType.kBrushless);
-  public CANSparkMax rightLead = new CANSparkMax(3, MotorType.kBrushless);
-
-  public CANSparkMax leftFollow = new CANSparkMax(2, MotorType.kBrushless);
-  public CANSparkMax rightFollow = new CANSparkMax(4, MotorType.kBrushless);
+  public LeaderBobTalonFX leftLead = new LeaderBobTalonFX(1, new BobTalonFX(2));
+  public LeaderBobTalonFX rightLead = new LeaderBobTalonFX(3, new BobTalonFX(4));
 
   BobDriveHelper helper;
   private double quickTurnThreshold = 0.2;
 
   public Drivetrain() {
+
     helper = new BobDriveHelper();
 
-    setupFollowers();
+    leftLead.configFactoryDefault();
+    rightLead.configFactoryDefault();
 
-    leftLead.setInverted(true);
-    rightLead.setInverted(false);
-
-  }
-
-  private void setupFollowers() {
-    leftFollow.follow(leftLead);
-    rightFollow.follow(rightLead);
+    leftLead.setInverted(false);
+    leftLead.setSensorPhase(true);
+    rightLead.setInverted(true);
+    rightLead.setSensorPhase(true);
   }
 
   public void drive(double left, double right) {
-    this.leftLead.set(left);
-    this.rightLead.set(right);
+    // this.leftLead.set(left);
+    // this.rightLead.set(right);
+  }
+
+  private void drive(ControlMode controlMode, double left, double right) {
+    this.leftLead.set(controlMode, left);
+    this.rightLead.set(controlMode, right);
   }
 
   public void drive(ControlMode controlMode, DriveSignal driveSignal) {
     this.drive(controlMode, driveSignal.getLeft(), driveSignal.getRight());
-  }
-
-  private void drive(ControlMode controlMode, double left, double right) {
   }
 
   @Override
@@ -65,5 +62,8 @@ public class Drivetrain extends SubsystemBase {
     boolean quickTurn = (moveValue < quickTurnThreshold && moveValue > -quickTurnThreshold);
     DriveSignal driveSignal = helper.cheesyDrive(moveValue, rotateValue, quickTurn, false);
     this.drive(ControlMode.PercentOutput, driveSignal);
+
+    SmartDashboard.putNumber("Rotate Value", rotateValue);
+    SmartDashboard.putNumber("Move Value", moveValue);
   }
 }
