@@ -12,13 +12,16 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Turret extends SubsystemBase {
-  private CANSparkMax turretLead = new CANSparkMax(9, MotorType.kBrushless);
+public class Tower extends SubsystemBase {
+  public CANSparkMax lead = new CANSparkMax(10, MotorType.kBrushless);
+
+  public CANSparkMax follow = new CANSparkMax(11, MotorType.kBrushless);
 
   /**
-   * Creates a new Turret.
+   * Creates a new Tower.
    */
-  public Turret() {
+  public Tower() {
+
   }
 
   @Override
