@@ -14,12 +14,17 @@ import frc.robot.Robot;
 import frc.robot.models.BobTalonFX;
 import frc.robot.models.DriveSignal;
 import frc.robot.models.LeaderBobTalonFX;
+import frc.robot.models.PhoenixGains;
 import frc.robot.utils.BobDriveHelper;
 
 public class Drivetrain extends SubsystemBase {
 
   public static int DRIVE_PROFILE = 0;
   public static int ROTATION_PROFILE = 1;
+
+  private PhoenixGains driveGains = new PhoenixGains(DRIVE_PROFILE, 0.0, 0.0, 0.0, 0.0, 0);
+	private PhoenixGains rotationGains = new PhoenixGains(ROTATION_PROFILE, 0.0, 0.0, 0.0, 0.0, 0);
+
 
   public LeaderBobTalonFX leftLead = new LeaderBobTalonFX(1, new BobTalonFX(2));
   public LeaderBobTalonFX rightLead = new LeaderBobTalonFX(3, new BobTalonFX(4));
@@ -33,12 +38,22 @@ public class Drivetrain extends SubsystemBase {
 
     leftLead.configFactoryDefault();
     rightLead.configFactoryDefault();
+    
+    configGains(driveGains);
+		configGains(rotationGains);
 
     leftLead.setInverted(false);
     leftLead.setSensorPhase(true);
     rightLead.setInverted(true);
     rightLead.setSensorPhase(true);
   }
+
+	public void configGains(PhoenixGains gains) {
+		this.leftLead.setGains(gains);
+		this.rightLead.setGains(gains);
+		rightLead.configMaxIntegralAccumulator(ROTATION_PROFILE, 3000);
+	}
+
 
   public void drive(double left, double right) {
     // this.leftLead.set(left);
