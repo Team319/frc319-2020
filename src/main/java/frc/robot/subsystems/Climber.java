@@ -10,29 +10,29 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Tower extends SubsystemBase {
-  public CANSparkMax towerLead = new CANSparkMax(10, MotorType.kBrushless);
+public class Climber extends SubsystemBase {
 
-  public CANSparkMax towerFollow = new CANSparkMax(11, MotorType.kBrushless);
+  public CANSparkMax climberLead = new CANSparkMax(13, MotorType.kBrushless);
+  public CANSparkMax climberFollow = new CANSparkMax(14, MotorType.kBrushless);
+
+  public DoubleSolenoid climberSolenoid = new DoubleSolenoid(4, 5);
 
   /**
-   * Creates a new Tower.
+   * Creates a new Climber.
    */
-  public Tower() {
+  public Climber() {
 
-    this.towerFollow.follow(towerLead);
-    this.towerFollow.setInverted(true);
-    this.towerLead.setInverted(false);
+    this.climberFollow.follow(climberLead);
+    this.climberFollow.setInverted(true);
+    this.climberLead.setInverted(false);
 
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-  }
-  public void set(double setpoint) {
-    lead.set(setpoint);
   }
 }
