@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -21,6 +23,7 @@ import frc.robot.models.PhoenixGains;
 public class Shooter extends SubsystemBase {
   private BobTalonFX shooterLead = new BobTalonFX(7);
   private BobTalonFX shooterFollow = new BobTalonFX(6);
+  private CANSparkMax hoodMotor = new CANSparkMax(5, MotorType.kBrushless);
 
   private final PhoenixGains shooterGains = new PhoenixGains(0, 0.05, 0.001, 0.7, 0.0472, 150);
   private MotionParameters shooterMotionParameters = new MotionParameters(0, 0, shooterGains);
@@ -49,14 +52,6 @@ public class Shooter extends SubsystemBase {
     return currentPosition;
   }
 
-  public void hoodExtend() {
-    this.hoodSolenoid.set(DoubleSolenoid.Value.kForward);
-  }
-
-  public void hoodRetract() {
-    this.hoodSolenoid.set(DoubleSolenoid.Value.kReverse);
-  }
-
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Shooter Velocity", this.getVelocity());
@@ -67,4 +62,7 @@ public class Shooter extends SubsystemBase {
     shooterLead.set(controlMode, setpoint);
   }
 
+  public void setHood(final ControlMode controlMode, final double setpoint) {
+    hoodMotor.set(setpoint);
+  }
 }
