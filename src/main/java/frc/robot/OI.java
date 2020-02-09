@@ -9,6 +9,7 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+import frc.robot.commands.collector.SpinCollector;
 import frc.robot.commands.shooter.ShooterClosedLoop;
 import frc.robot.commands.shooter.SpinShooter;
 import frc.robot.controllers.BobXboxController;
@@ -21,6 +22,9 @@ public class OI {
 
         driverController.aButton.whenPressed(new ShooterClosedLoop());
         driverController.aButton.whenReleased(new SpinShooter(ControlMode.PercentOutput, 0.0));
+
+        driverController.bButton.whenPressed(new SpinCollector(ControlMode.PercentOutput, 0.35));
+        driverController.bButton.whenReleased(new SpinCollector(ControlMode.PercentOutput, 0.0));
     }
 
 }
