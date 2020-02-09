@@ -14,6 +14,7 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Serializer;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Tower;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,6 +28,7 @@ public class Robot extends TimedRobot {
   public static Collector collector = new Collector();
   public static Drivetrain drivetrain = new Drivetrain();
   public static Serializer serializer = new Serializer();
+  public static Tower tower = new Tower();
   public static OI oi;
 
   private Command m_autonomousCommand;
