@@ -37,7 +37,7 @@ public class Collector extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void setCollector(final ControlMode controlMode, final double setpoint) {
-    collectorLead.set(setpoint);
+  public void setCollector(ControlMode controlMode, double setpoint) {
+    // collectorLead.set(setpoint);
   }
 }

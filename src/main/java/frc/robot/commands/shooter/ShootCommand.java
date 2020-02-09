@@ -7,34 +7,45 @@
 
 package frc.robot.commands.shooter;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.serializer.SpinSerializer;
+import frc.robot.commands.tower.SpinTower;
 
-public class HoodPosition extends CommandBase {
+public class ShootCommand extends CommandBase {
+  private double hoodSetpoint;
+  private double towerSetpoint;
+  private double shooterSetpoint;
+  private double serializerSetpoint;
 
-  private double hoodSetpoint = 0.75;
-
-  public HoodPosition(double setpoint) {
-    addRequirements(Robot.shooter);
-    this.hoodSetpoint = setpoint;
+  /**
+   * Creates a new ShootClose.
+   */
+  public ShootCommand(double hoodSetpoint, double shooterSetpoint, double towerSetpoint, double serializerSetpoint) {
+    
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.shooter.setHood(hoodSetpoint);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    new SequentialCommandGroup(
+      new ParallelCommandGroup(new HoodPosition(hoodSetpoint)),
+      new ShooterClosedLoop(shooterSetpoint),
+      new ParallelCommandGroup(new SpinTower(ControlMode.PercentOutput, towerSetpoint), new SpinSerializer(ControlMode.PercentOutput, serializerSetpoint)));
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(final boolean interrupted) {
+  public void end(boolean interrupted) {
   }
 
   // Returns true when the command should end.

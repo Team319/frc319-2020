@@ -5,26 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.shooter;
+package frc.robot.commands.tower;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class HoodPosition extends CommandBase {
+public class SpinTower extends CommandBase {
+  private ControlMode controlMode = ControlMode.PercentOutput;
 
-  private double hoodSetpoint = 0.75;
+  private double towerSetpoint = 0.75;
 
-  public HoodPosition(double setpoint) {
-    addRequirements(Robot.shooter);
-    this.hoodSetpoint = setpoint;
+  public SpinTower(ControlMode controlMode, double setpoint) {
+    addRequirements(Robot.tower);
+    this.towerSetpoint = setpoint;
+    this.controlMode = controlMode;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.shooter.setHood(hoodSetpoint);
+    Robot.tower.set(towerSetpoint);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
