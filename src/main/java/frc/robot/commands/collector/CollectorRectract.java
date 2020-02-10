@@ -10,12 +10,11 @@ package frc.robot.commands.collector;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class CollectorExtend extends CommandBase {
+public class CollectorRectract extends CommandBase {
   /**
-   * Creates a new CollectorExtend.
+   * Creates a new CollectorRectract.
    */
-  public CollectorExtend() {
-    addRequirements(Robot.collector);
+  public CollectorRectract() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -27,7 +26,7 @@ public class CollectorExtend extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.collector.collectorExtend();
+    Robot.collector.collectorRetract();
   }
 
   // Called once the command ends or is interrupted.

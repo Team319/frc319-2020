@@ -5,29 +5,32 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.collector;
+package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.models.RobotMode;
 
-public class CollectorExtend extends CommandBase {
+public class SetRobotMode extends CommandBase {
+  private RobotMode robotMode = RobotMode.Normal;
+
   /**
-   * Creates a new CollectorExtend.
+   * Creates a new SetRobotMode.
    */
-  public CollectorExtend() {
-    addRequirements(Robot.collector);
+  public SetRobotMode(RobotMode robotMode) {
+    this.robotMode = robotMode;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Robot.mode = this.robotMode;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.collector.collectorExtend();
   }
 
   // Called once the command ends or is interrupted.
@@ -38,6 +41,6 @@ public class CollectorExtend extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Serializer;
+import frc.robot.models.RobotMode;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Tower;
@@ -28,8 +30,10 @@ public class Robot extends TimedRobot {
   public static Collector collector = new Collector();
   public static Drivetrain drivetrain = new Drivetrain();
   public static Serializer serializer = new Serializer();
+  public static Climber climber = new Climber();
   public static Tower tower = new Tower();
   public static OI oi;
+  public static RobotMode mode = RobotMode.Normal;
 
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;

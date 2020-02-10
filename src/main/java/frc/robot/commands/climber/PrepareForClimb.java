@@ -5,17 +5,19 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.collector;
+package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.collector.CollectorRectract;
+import frc.robot.models.RobotMode;
 
-public class CollectorExtend extends CommandBase {
+public class PrepareForClimb extends CommandBase {
   /**
-   * Creates a new CollectorExtend.
+   * Creates a new PrepareForClimb.
    */
-  public CollectorExtend() {
-    addRequirements(Robot.collector);
+  public PrepareForClimb() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -27,7 +29,9 @@ public class CollectorExtend extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.collector.collectorExtend();
+    new SequentialCommandGroup(
+        // add turret at later date
+        new CollectorRectract(), new ParallelCommandGroup(new ClimberRetract(), new SetRobotMode(RobotMode.Climb)));
   }
 
   // Called once the command ends or is interrupted.
