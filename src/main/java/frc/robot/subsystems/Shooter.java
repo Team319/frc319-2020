@@ -62,10 +62,10 @@ public class Shooter extends SubsystemBase {
   }
 
   public void set(ControlMode controlMode, double setpoint) {
-    // shooterLead.set(controlMode, setpoint);
+    shooterLead.set(controlMode, setpoint);
   }
 
-  public void setHood(final ControlMode controlMode, final double setpoint) {
+  public void setHood(double setpoint) {
     hoodMotor.set(setpoint);
   }
 }

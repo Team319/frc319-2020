@@ -5,36 +5,34 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.shooter;
-
+package frc.robot.commands.collector;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class HoodPosition extends CommandBase {
-
-  private double hoodSetpoint = 0.75;
-
-  public HoodPosition(double setpoint) {
-    addRequirements(Robot.shooter);
-    this.hoodSetpoint = setpoint;
+public class CollectorRetract extends CommandBase {
+  /**
+   * Creates a new CollectorRetract.
+   */
+  public CollectorRetract() {
+    addRequirements(Robot.collector);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.shooter.setHood(hoodSetpoint);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    Robot.collector.collectorRetract();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(final boolean interrupted) {
+  public void end(boolean interrupted) {
   }
 
   // Returns true when the command should end.

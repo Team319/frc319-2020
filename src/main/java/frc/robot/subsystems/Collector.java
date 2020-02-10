@@ -15,9 +15,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Collector extends SubsystemBase {
-  // private final CANSparkMax collectorLead = new CANSparkMax(8,
-  // MotorType.kBrushless);
-  // private DoubleSolenoid collectorSolenoid = new DoubleSolenoid(2, 3);
+  private final CANSparkMax collectorLead = new CANSparkMax(8, MotorType.kBrushless);
+  private DoubleSolenoid collectorSolenoid = new DoubleSolenoid(2, 3);
 
   /**
    * Creates a new Collector.
@@ -26,11 +25,11 @@ public class Collector extends SubsystemBase {
   }
 
   public void collectorExtend() {
-    // this.collectorSolenoid.set(DoubleSolenoid.Value.kForward);
+    this.collectorSolenoid.set(DoubleSolenoid.Value.kForward);
   }
 
   public void collectorRetract() {
-    // this.collectorSolenoid.set(DoubleSolenoid.Value.kReverse);
+    this.collectorSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
   @Override
@@ -38,7 +37,7 @@ public class Collector extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void setCollector(final ControlMode controlMode, final double setpoint) {
+  public void setCollector(ControlMode controlMode, double setpoint) {
     // collectorLead.set(setpoint);
   }
 }

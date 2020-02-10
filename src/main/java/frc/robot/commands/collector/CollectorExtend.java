@@ -15,6 +15,7 @@ public class CollectorExtend extends CommandBase {
    * Creates a new CollectorExtend.
    */
   public CollectorExtend() {
+    addRequirements(Robot.collector);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

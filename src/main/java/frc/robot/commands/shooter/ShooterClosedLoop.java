@@ -19,7 +19,7 @@ public class ShooterClosedLoop extends CommandBase {
   /**
    * Creates a new ShooterClosedLoop.
    */
-  public ShooterClosedLoop() {
+  public ShooterClosedLoop(double percentage) {
     addRequirements(Robot.shooter);
     // Use addRequirements() here to declare subsystem dependencies.
   }
