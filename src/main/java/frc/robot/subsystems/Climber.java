@@ -31,6 +31,14 @@ public class Climber extends SubsystemBase {
 
   }
 
+  public void climberExtend() {
+    this.climberSolenoid.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void climberRetract() {
+    this.climberSolenoid.set(DoubleSolenoid.Value.kReverse);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
