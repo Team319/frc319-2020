@@ -28,11 +28,11 @@ public class Tower extends SubsystemBase {
 
   }
 
-  @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
   public void set(double setpoint) {
-    lead.set(setpoint);
+    towerLead.set(setpoint);
   }
 }
