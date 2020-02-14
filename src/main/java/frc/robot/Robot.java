@@ -18,6 +18,7 @@ import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Serializer;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Tower;
+import frc.robot.subsystems.Turret;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,6 +35,7 @@ public class Robot extends TimedRobot {
   public static Climber climber = new Climber();
   public static Tower tower = new Tower();
   public static Limelight limelight = new Limelight();
+  public static Turret turret = new Turret();
   public static OI oi;
   public static RobotMode mode = RobotMode.Normal;
 

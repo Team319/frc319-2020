@@ -13,7 +13,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Turret extends SubsystemBase {
-  
+
   private CANSparkMax turretLead = new CANSparkMax(9, MotorType.kBrushless);
 
   /**
@@ -25,5 +25,9 @@ public class Turret extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  public void set(double setpoint) {
+    turretLead.set(setpoint);
   }
 }
