@@ -14,14 +14,15 @@ import frc.robot.Robot;
 
 public class ShooterClosedLoop extends CommandBase {
   double maxVelocity = -21666;
-  double percentage = 0.55;
+  double percentage;
 
   /**
    * Creates a new ShooterClosedLoop.
    */
-  public ShooterClosedLoop(double percentage) {
+  public ShooterClosedLoop(double p) {
     addRequirements(Robot.shooter);
     // Use addRequirements() here to declare subsystem dependencies.
+    percentage = p;
   }
 
   // Called when the command is initially scheduled.

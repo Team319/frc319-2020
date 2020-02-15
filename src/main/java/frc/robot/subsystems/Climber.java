@@ -15,28 +15,28 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
 
-  public CANSparkMax climberLead = new CANSparkMax(13, MotorType.kBrushless);
-  public CANSparkMax climberFollow = new CANSparkMax(14, MotorType.kBrushless);
+  // public CANSparkMax climberLead = new CANSparkMax(13, MotorType.kBrushless);
+  // public CANSparkMax climberFollow = new CANSparkMax(14, MotorType.kBrushless);
 
-  public DoubleSolenoid climberSolenoid = new DoubleSolenoid(4, 5);
+  // public DoubleSolenoid climberSolenoid = new DoubleSolenoid(4, 5);
 
   /**
    * Creates a new Climber.
    */
   public Climber() {
 
-    this.climberFollow.follow(climberLead);
-    this.climberFollow.setInverted(true);
-    this.climberLead.setInverted(false);
+    // this.climberFollow.follow(climberLead);
+    // this.climberFollow.setInverted(true);
+    // this.climberLead.setInverted(false);
 
   }
 
   public void climberExtend() {
-    this.climberSolenoid.set(DoubleSolenoid.Value.kForward);
+    // this.climberSolenoid.set(DoubleSolenoid.Value.kForward);
   }
 
   public void climberRetract() {
-    this.climberSolenoid.set(DoubleSolenoid.Value.kReverse);
+    // this.climberSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
   @Override

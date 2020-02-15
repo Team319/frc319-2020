@@ -23,11 +23,12 @@ public class Drivetrain extends SubsystemBase {
   public static int ROTATION_PROFILE = 1;
 
   private PhoenixGains driveGains = new PhoenixGains(DRIVE_PROFILE, 0.0, 0.0, 0.0, 0.0, 0);
-	private PhoenixGains rotationGains = new PhoenixGains(ROTATION_PROFILE, 0.0, 0.0, 0.0, 0.0, 0);
+  private PhoenixGains rotationGains = new PhoenixGains(ROTATION_PROFILE, 0.0, 0.0, 0.0, 0.0, 0);
 
-
-  public LeaderBobTalonFX leftLead = new LeaderBobTalonFX(1, new BobTalonFX(2));
-  public LeaderBobTalonFX rightLead = new LeaderBobTalonFX(3, new BobTalonFX(4));
+  // public LeaderBobTalonFX leftLead = new LeaderBobTalonFX(1, new
+  // BobTalonFX(2));
+  // public LeaderBobTalonFX rightLead = new LeaderBobTalonFX(3, new
+  // BobTalonFX(4));
 
   BobDriveHelper helper;
   private double quickTurnThreshold = 0.2;
@@ -36,24 +37,23 @@ public class Drivetrain extends SubsystemBase {
 
     helper = new BobDriveHelper();
 
-    leftLead.configFactoryDefault();
-    rightLead.configFactoryDefault();
-    
-    configGains(driveGains);
-		configGains(rotationGains);
+    // leftLead.configFactoryDefault();
+    // rightLead.configFactoryDefault();
 
-    leftLead.setInverted(false);
-    leftLead.setSensorPhase(true);
-    rightLead.setInverted(true);
-    rightLead.setSensorPhase(true);
+    configGains(driveGains);
+    configGains(rotationGains);
+
+    // leftLead.setInverted(false);
+    // leftLead.setSensorPhase(true);
+    // rightLead.setInverted(true);
+    // rightLead.setSensorPhase(true);
   }
 
-	public void configGains(PhoenixGains gains) {
-		this.leftLead.setGains(gains);
-		this.rightLead.setGains(gains);
-		rightLead.configMaxIntegralAccumulator(ROTATION_PROFILE, 3000);
-	}
-
+  public void configGains(PhoenixGains gains) {
+    // this.leftLead.setGains(gains);
+    // this.rightLead.setGains(gains);
+    // rightLead.configMaxIntegralAccumulator(ROTATION_PROFILE, 3000);
+  }
 
   public void drive(double left, double right) {
     // this.leftLead.set(left);
@@ -61,8 +61,8 @@ public class Drivetrain extends SubsystemBase {
   }
 
   private void drive(ControlMode controlMode, double left, double right) {
-    this.leftLead.set(controlMode, left);
-    this.rightLead.set(controlMode, right);
+    // this.leftLead.set(controlMode, left);
+    // this.rightLead.set(controlMode, right);
   }
 
   public void drive(ControlMode controlMode, DriveSignal driveSignal) {

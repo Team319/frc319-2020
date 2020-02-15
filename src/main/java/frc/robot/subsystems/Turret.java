@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Turret extends SubsystemBase {
 
-  private CANSparkMax turretLead = new CANSparkMax(9, MotorType.kBrushless);
+  // private CANSparkMax turretLead = new CANSparkMax(9, MotorType.kBrushless);
 
   /**
    * Creates a new Turret.
@@ -28,6 +28,6 @@ public class Turret extends SubsystemBase {
   }
 
   public void set(double setpoint) {
-    turretLead.set(setpoint);
+    // turretLead.set(setpoint);
   }
 }

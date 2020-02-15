@@ -13,7 +13,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Serializer extends SubsystemBase {
-  private CANSparkMax lead = new CANSparkMax(5, MotorType.kBrushless);
+  // private CANSparkMax lead = new CANSparkMax(5, MotorType.kBrushless);
   /**
    * Creates a new Serializer.
    */
@@ -27,7 +27,7 @@ public class Serializer extends SubsystemBase {
   }
 
   public void set(double setpoint) {
-    lead.set(setpoint);
+    // lead.set(setpoint);
   }
 
 }
