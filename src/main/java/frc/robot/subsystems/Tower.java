@@ -34,5 +34,6 @@ public class Tower extends SubsystemBase {
 
   public void set(double setpoint) {
     towerLead.set(setpoint);
+    towerFollow.set(setpoint);
   }
 }

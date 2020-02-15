@@ -26,8 +26,10 @@ public class Drivetrain extends SubsystemBase {
 	private PhoenixGains rotationGains = new PhoenixGains(ROTATION_PROFILE, 0.0, 0.0, 0.0, 0.0, 0);
 
 
-  public LeaderBobTalonFX leftLead = new LeaderBobTalonFX(1, new BobTalonFX(2));
-  public LeaderBobTalonFX rightLead = new LeaderBobTalonFX(3, new BobTalonFX(4));
+  public BobTalonFX leftLead = new BobTalonFX(1);
+  public BobTalonFX leftFollow = new BobTalonFX(2);
+  public BobTalonFX rightLead = new BobTalonFX(3);
+  public BobTalonFX rightFollow = new BobTalonFX(4);
 
   BobDriveHelper helper;
   private double quickTurnThreshold = 0.2;
@@ -62,7 +64,9 @@ public class Drivetrain extends SubsystemBase {
 
   private void drive(ControlMode controlMode, double left, double right) {
     this.leftLead.set(controlMode, left);
+    this.leftFollow.set(controlMode, left);
     this.rightLead.set(controlMode, right);
+    this.rightFollow.set(controlMode, right);
   }
 
   public void drive(ControlMode controlMode, DriveSignal driveSignal) {
