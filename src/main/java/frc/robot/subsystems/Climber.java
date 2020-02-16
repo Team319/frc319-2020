@@ -25,9 +25,9 @@ public class Climber extends SubsystemBase {
    */
   public Climber() {
 
-    // this.climberFollow.follow(climberLead);
-    // this.climberFollow.setInverted(true);
-    // this.climberLead.setInverted(false);
+    this.climberFollow.setInverted(true);
+    this.climberLead.setInverted(false);
+
 
   }
 

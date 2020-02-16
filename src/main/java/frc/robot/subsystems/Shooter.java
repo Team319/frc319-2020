@@ -23,7 +23,7 @@ import frc.robot.models.MotionParameters;
 import frc.robot.models.PhoenixGains;
 
 public class Shooter extends SubsystemBase {
-
+  double currentVelocity;
   private BobTalonFX shooterLead = new BobTalonFX(7);
   private BobTalonFX shooterFollow = new BobTalonFX(6);
   // private CANSparkMax hoodMotor = new CANSparkMax(5, MotorType.kBrushless);
@@ -34,18 +34,17 @@ public class Shooter extends SubsystemBase {
   /**
    * Creates a new Shooter.
    */
-  public Shooter() {
-
-    this.shooterFollow.follow(shooterLead);
-    this.shooterFollow.setInverted(InvertType.OpposeMaster);
+  public Shooter() {  
+    this.shooterFollow.setInverted(true);
     this.shooterLead.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     this.shooterLead.configClosedloopRamp(0.25);
     this.shooterLead.configMotionParameters(shooterMotionParameters);
-
   }
+
 
   public double getVelocity() {
     return this.shooterLead.getSelectedSensorVelocity();
+
   }
 
   public double getPosition() {
@@ -70,6 +69,7 @@ public class Shooter extends SubsystemBase {
 
   public void set(ControlMode controlMode, double setpoint) {
     shooterLead.set(controlMode, setpoint);
+    shooterFollow.set(controlMode, setpoint);
   }
 
   public void setHood(double setpoint) {
