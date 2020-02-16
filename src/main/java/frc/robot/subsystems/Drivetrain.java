@@ -45,8 +45,10 @@ public class Drivetrain extends SubsystemBase {
 		configGains(rotationGains);
 
     leftLead.setInverted(false);
+    leftFollow.setInverted(false);
     leftLead.setSensorPhase(true);
     rightLead.setInverted(true);
+    rightFollow.setInverted(true);
     rightLead.setSensorPhase(true);
   }
 
