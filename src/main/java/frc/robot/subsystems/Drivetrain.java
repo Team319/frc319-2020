@@ -43,10 +43,12 @@ public class Drivetrain extends SubsystemBase {
     configGains(driveGains);
     configGains(rotationGains);
 
-    // leftLead.setInverted(false);
-    // leftLead.setSensorPhase(true);
-    // rightLead.setInverted(true);
-    // rightLead.setSensorPhase(true);
+    leftLead.setInverted(false);
+    leftFollow.setInverted(false);
+    leftLead.setSensorPhase(true);
+    rightLead.setInverted(true);
+    rightFollow.setInverted(true);
+    rightLead.setSensorPhase(true);
   }
 
   public void configGains(PhoenixGains gains) {
