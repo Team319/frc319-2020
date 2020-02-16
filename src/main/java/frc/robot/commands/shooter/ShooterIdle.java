@@ -15,13 +15,16 @@ import frc.robot.Robot;
 import frc.robot.subsystems.Shooter;
 
 public class ShooterIdle extends CommandBase {
-  private boolean firstTime;
+  boolean firstTime;
+  double percentage;
+  double maxVelocity = -21666;
 
   /**
    * Creates a new SafelySlowDownShooter.
    */
-  public ShooterIdle() {
+  public ShooterIdle(double p) {
     addRequirements(Robot.shooter);
+    percentage = p;
 
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -35,9 +38,9 @@ public class ShooterIdle extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if ((Robot.shooter.getVelocity() >= -2100) && (firstTime)) {
+    if ((Robot.shooter.getVelocity() >= (maxVelocity * percentage + 100)) && (firstTime)) {
       firstTime = false;
-      Robot.shooter.set(ControlMode.Velocity, -2166);
+      Robot.shooter.set(ControlMode.Velocity, (maxVelocity * percentage));
     } else if (firstTime) {
       Robot.shooter.set(ControlMode.PercentOutput, 0);
     }
