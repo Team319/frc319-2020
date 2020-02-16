@@ -23,7 +23,7 @@ public class Pneumatics extends SubsystemBase {
   }
 
   public void compressorRun() {
-    compressor.setClosedLoopControl(true);
+    // compressor.setClosedLoopControl(true);
   }
 
   @Override

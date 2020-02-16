@@ -23,8 +23,7 @@ public class Drivetrain extends SubsystemBase {
   public static int ROTATION_PROFILE = 1;
 
   private PhoenixGains driveGains = new PhoenixGains(DRIVE_PROFILE, 0.0, 0.0, 0.0, 0.0, 0);
-	private PhoenixGains rotationGains = new PhoenixGains(ROTATION_PROFILE, 0.0, 0.0, 0.0, 0.0, 0);
-
+  private PhoenixGains rotationGains = new PhoenixGains(ROTATION_PROFILE, 0.0, 0.0, 0.0, 0.0, 0);
 
   public BobTalonFX leftLead = new BobTalonFX(1);
   public BobTalonFX leftFollow = new BobTalonFX(2);
@@ -38,11 +37,11 @@ public class Drivetrain extends SubsystemBase {
 
     helper = new BobDriveHelper();
 
-    leftLead.configFactoryDefault();
-    rightLead.configFactoryDefault();
-    
+    // leftLead.configFactoryDefault();
+    // rightLead.configFactoryDefault();
+
     configGains(driveGains);
-		configGains(rotationGains);
+    configGains(rotationGains);
 
     leftLead.setInverted(false);
     leftFollow.setInverted(false);
@@ -52,12 +51,11 @@ public class Drivetrain extends SubsystemBase {
     rightLead.setSensorPhase(true);
   }
 
-	public void configGains(PhoenixGains gains) {
-		this.leftLead.setGains(gains);
-		this.rightLead.setGains(gains);
-		rightLead.configMaxIntegralAccumulator(ROTATION_PROFILE, 3000);
-	}
-
+  public void configGains(PhoenixGains gains) {
+    // this.leftLead.setGains(gains);
+    // this.rightLead.setGains(gains);
+    // rightLead.configMaxIntegralAccumulator(ROTATION_PROFILE, 3000);
+  }
 
   public void drive(double left, double right) {
     // this.leftLead.set(left);
@@ -69,6 +67,7 @@ public class Drivetrain extends SubsystemBase {
     this.leftFollow.set(controlMode, left);
     this.rightLead.set(controlMode, right);
     this.rightFollow.set(controlMode, right);
+
   }
 
   public void drive(ControlMode controlMode, DriveSignal driveSignal) {

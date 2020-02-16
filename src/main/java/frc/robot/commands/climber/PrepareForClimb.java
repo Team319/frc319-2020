@@ -10,7 +10,7 @@ package frc.robot.commands.climber;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.collector.CollectorRectract;
+import frc.robot.commands.collector.CollectorRetract;
 import frc.robot.models.RobotMode;
 
 public class PrepareForClimb extends CommandBase {
@@ -31,7 +31,7 @@ public class PrepareForClimb extends CommandBase {
   public void execute() {
     new SequentialCommandGroup(
         // add turret at later date
-        new CollectorRectract(), new ParallelCommandGroup(new ClimberRetract(), new SetRobotMode(RobotMode.Climb)));
+        new CollectorRetract(), new ParallelCommandGroup(new ClimberRetract(), new SetRobotMode(RobotMode.Climb)));
   }
 
   // Called once the command ends or is interrupted.
