@@ -13,21 +13,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 public class SpinSerializer extends CommandBase {
-  private ControlMode controlMode = ControlMode.PercentOutput;
 
   private double serializerSetpoint = 0.75;
 
-  public SpinSerializer(ControlMode controlMode, double setpoint) {
+  public SpinSerializer(double setpoint) {
     addRequirements(Robot.serializer);
     this.serializerSetpoint = setpoint;
-    this.controlMode = controlMode;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.shooter.set(controlMode, serializerSetpoint);
+    Robot.shooter.set(ControlMode.PercentOutput, serializerSetpoint);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

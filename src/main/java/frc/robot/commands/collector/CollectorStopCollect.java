@@ -7,8 +7,6 @@
 
 package frc.robot.commands.collector;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -19,7 +17,7 @@ public class CollectorStopCollect extends SequentialCommandGroup {
    * Creates a new StopCollect.
    */
   public CollectorStopCollect() {
-    //stops the collector spinning and brings it back in
-    super(new SpinCollector(ControlMode.PercentOutput, 0), new CollectorRetract());
+    // stops the collector spinning and brings it back in
+    super(new SpinCollector(0), new CollectorRetract());
   }
 }
