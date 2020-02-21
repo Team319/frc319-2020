@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.models.RobotMode;
@@ -19,6 +20,7 @@ import frc.robot.subsystems.Serializer;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Tower;
 import frc.robot.subsystems.Turret;
+import frc.robot.commands.autos.SneakyPete;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,6 +30,9 @@ import frc.robot.subsystems.Turret;
  * project.
  */
 public class Robot extends TimedRobot {
+  SendableChooser<String> autoChooser;
+  Command autonomousCommand;
+
   public static Shooter shooter = new Shooter();
   public static Collector collector = new Collector();
   public static Drivetrain drivetrain = new Drivetrain();
@@ -53,6 +58,10 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     oi = new OI();
+
+    autoChooser = new SendableChooser<String>();
+    autoChooser.setDefaultOption("Do Nothing", "None");
+    autoChooser.addOption("Sneaky Pete", "SneakyPete");
   }
 
   /**
