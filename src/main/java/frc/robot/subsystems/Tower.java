@@ -13,29 +13,22 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Tower extends SubsystemBase {
-  // public CANSparkMax towerLead = new CANSparkMax(10, MotorType.kBrushless);
+  public CANSparkMax towerLead = new CANSparkMax(10, MotorType.kBrushless);
+  public CANSparkMax towerFollow = new CANSparkMax(11, MotorType.kBrushless);
 
-  // public CANSparkMax towerFollow = new CANSparkMax(11, MotorType.kBrushless);
-
-  /**
-   * Creates a new Tower.
-   */
   public Tower() {
 
-    // this.towerFollow.follow(towerLead);
-    // this.towerFollow.setInverted(true);
-    // this.towerLead.setInverted(false);
+    this.towerFollow.setInverted(true);
+    this.towerLead.setInverted(false);
 
   }
 
   public void periodic() {
-    // This method will be called once per scheduler run
   }
 
   public void set(double setpoint) {
-    
-    // towerLead.set(setpoint);
-    // towerFollow.set(setpoint);
+    towerLead.set(setpoint);
+    towerFollow.set(setpoint);
     
   }
 }

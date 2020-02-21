@@ -13,14 +13,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 public class SpinTower extends CommandBase {
-  private ControlMode controlMode = ControlMode.PercentOutput;
 
   private double towerSetpoint = 0.75;
 
-  public SpinTower(ControlMode controlMode, double setpoint) {
+  public SpinTower(double setpoint) {
     addRequirements(Robot.tower);
     this.towerSetpoint = setpoint;
-    this.controlMode = controlMode;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
