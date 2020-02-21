@@ -38,6 +38,7 @@ public class ShooterIdle extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    //due to issues slowing down, allows the shooter to coast to the selected speed, before maintaining a constant speed.
     if ((Robot.shooter.getVelocity() >= (maxVelocity * percentage + 100)) && (firstTime)) {
       firstTime = false;
       Robot.shooter.set(ControlMode.Velocity, (maxVelocity * percentage));

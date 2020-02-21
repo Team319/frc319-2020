@@ -19,8 +19,7 @@ public class CollectorStopCollect extends SequentialCommandGroup {
    * Creates a new StopCollect.
    */
   public CollectorStopCollect() {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());
+    //stops the collector spinning and brings it back in
     super(new SpinCollector(ControlMode.PercentOutput, 0), new CollectorRetract());
   }
 }

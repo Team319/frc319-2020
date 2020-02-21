@@ -19,8 +19,7 @@ public class CollectorStartCollect extends SequentialCommandGroup {
    * Creates a new CollectorStartCollect.
    */
   public CollectorStartCollect() {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());
+    //extends collector and begins spinning
     super(new CollectorExtend(), new SpinCollector(ControlMode.PercentOutput, 0));
   }
 }

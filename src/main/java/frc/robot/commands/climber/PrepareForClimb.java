@@ -29,6 +29,7 @@ public class PrepareForClimb extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    //Begins climb by bringing the collector in, launching the climber, and turning to climb mode
     new SequentialCommandGroup(
         // add turret at later date
         new CollectorRetract(), new ParallelCommandGroup(new ClimberRetract(), new SetRobotMode(RobotMode.Climb)));
