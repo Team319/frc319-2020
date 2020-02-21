@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 import frc.robot.models.BobTalonFX;
 import frc.robot.models.DriveSignal;
-import frc.robot.models.LeaderBobTalonFX;
 import frc.robot.models.PhoenixGains;
 import frc.robot.utils.BobDriveHelper;
 
@@ -37,8 +36,8 @@ public class Drivetrain extends SubsystemBase {
 
     helper = new BobDriveHelper();
 
-    // leftLead.configFactoryDefault();
-    // rightLead.configFactoryDefault();
+    leftLead.configFactoryDefault();
+    rightLead.configFactoryDefault();
 
     configGains(driveGains);
     configGains(rotationGains);
@@ -46,23 +45,20 @@ public class Drivetrain extends SubsystemBase {
     leftLead.setInverted(false);
     leftFollow.setInverted(false);
     leftLead.setSensorPhase(true);
+
     rightLead.setInverted(true);
     rightFollow.setInverted(true);
     rightLead.setSensorPhase(true);
   }
 
   public void configGains(PhoenixGains gains) {
-    // this.leftLead.setGains(gains);
-    // this.rightLead.setGains(gains);
-    // rightLead.configMaxIntegralAccumulator(ROTATION_PROFILE, 3000);
-  }
-
-  public void drive(double left, double right) {
-    // this.leftLead.set(left);
-    // this.rightLead.set(right);
+    this.leftLead.setGains(gains);
+    this.rightLead.setGains(gains);
+    rightLead.configMaxIntegralAccumulator(ROTATION_PROFILE, 3000);
   }
 
   private void drive(ControlMode controlMode, double left, double right) {
+
     this.leftLead.set(controlMode, left);
     this.leftFollow.set(controlMode, left);
     this.rightLead.set(controlMode, right);
@@ -76,14 +72,16 @@ public class Drivetrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    double rotateValue = Robot.oi.driverController.rightStick.getX();
 
+    double rotateValue = Robot.oi.driverController.rightStick.getX();
     double moveValue = -Robot.oi.driverController.leftStick.getY();
+
     boolean quickTurn = (moveValue < quickTurnThreshold && moveValue > -quickTurnThreshold);
     DriveSignal driveSignal = helper.cheesyDrive(moveValue, rotateValue, quickTurn, false);
     this.drive(ControlMode.PercentOutput, driveSignal);
 
-    SmartDashboard.putNumber("Rotate Value", rotateValue);
-    SmartDashboard.putNumber("Move Value", moveValue);
+    // SmartDashboard.putNumber("Rotate Value", rotateValue);
+    // SmartDashboard.putNumber("Move Value", moveValue);
+
   }
 }
