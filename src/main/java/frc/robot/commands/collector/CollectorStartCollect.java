@@ -7,8 +7,6 @@
 
 package frc.robot.commands.collector;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -19,7 +17,7 @@ public class CollectorStartCollect extends SequentialCommandGroup {
    * Creates a new CollectorStartCollect.
    */
   public CollectorStartCollect() {
-    //extends collector and begins spinning
-    super(new CollectorExtend(), new SpinCollector(ControlMode.PercentOutput, 0));
+    // extends collector and begins spinning
+    super(new CollectorExtend(), new SpinCollector(0));
   }
 }
