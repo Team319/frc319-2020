@@ -37,6 +37,7 @@ public class ShootCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    //sets the hood possition, begins the shooter spinning, and starts both the tower and serializer spinning
     new SequentialCommandGroup(
       new ParallelCommandGroup(new HoodPosition(hoodSetpoint)),
       new ShooterClosedLoop(shooterSetpoint),
