@@ -40,8 +40,8 @@ public class ShootCommand extends CommandBase {
     // sets the hood possition, begins the shooter spinning, and starts both the
     // tower and serializer spinning
     new SequentialCommandGroup(new ParallelCommandGroup(new HoodPosition(hoodSetpoint)),
-        new ShooterClosedLoop(shooterSetpoint), new ParallelCommandGroup(
-            new SpinTower(ControlMode.PercentOutput, towerSetpoint), new SpinSerializer(serializerSetpoint)));
+        new ShooterClosedLoop(shooterSetpoint),
+        new ParallelCommandGroup(new SpinTower(towerSetpoint), new SpinSerializer(serializerSetpoint)));
   }
 
   // Called once the command ends or is interrupted.

@@ -13,8 +13,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Tower extends SubsystemBase {
-  public CANSparkMax towerLead = new CANSparkMax(10, MotorType.kBrushless);
-  public CANSparkMax towerFollow = new CANSparkMax(11, MotorType.kBrushless);
+  public CANSparkMax towerLead = new CANSparkMax(13, MotorType.kBrushless);
+  public CANSparkMax towerFollow = new CANSparkMax(14, MotorType.kBrushless);
 
   public Tower() {
 
@@ -29,6 +29,6 @@ public class Tower extends SubsystemBase {
   public void set(double setpoint) {
     towerLead.set(setpoint);
     towerFollow.set(setpoint);
-    
+
   }
 }

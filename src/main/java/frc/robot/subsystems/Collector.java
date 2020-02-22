@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Collector extends SubsystemBase {
-  private final CANSparkMax collectorLead = new CANSparkMax(8, MotorType.kBrushless);
+  private final CANSparkMax collectorLead = new CANSparkMax(10, MotorType.kBrushless);
   private DoubleSolenoid collectorSolenoid = new DoubleSolenoid(2, 3);
 
   /**
