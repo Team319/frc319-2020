@@ -15,8 +15,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
 
-  public CANSparkMax climberLead = new CANSparkMax(13, MotorType.kBrushless);
-  public CANSparkMax climberFollow = new CANSparkMax(14, MotorType.kBrushless);
+  public CANSparkMax climberLead = new CANSparkMax(8, MotorType.kBrushless);
+  public CANSparkMax climberFollow = new CANSparkMax(9, MotorType.kBrushless);
 
   public DoubleSolenoid climberSolenoid = new DoubleSolenoid(4, 5);
 
