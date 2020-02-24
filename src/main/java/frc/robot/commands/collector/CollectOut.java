@@ -5,29 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.shooter;
+package frc.robot.commands.collector;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class SpinShooter extends CommandBase {
-  private ControlMode controlMode = ControlMode.PercentOutput;
+public class CollectOut extends CommandBase {
+  private double collectorSetpoint;
 
-  private double shooterSetpoint;
-
-  public SpinShooter(ControlMode controlMode, double setpoint) {
-    addRequirements(Robot.shooter);
-    this.shooterSetpoint = setpoint;
-    this.controlMode = controlMode;
+  public CollectOut(double setpoint) {
+    addRequirements(Robot.collector);
+    this.collectorSetpoint = setpoint;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.shooter.set(controlMode, shooterSetpoint);
+    Robot.collector.setCollector(ControlMode.PercentOutput, collectorSetpoint);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

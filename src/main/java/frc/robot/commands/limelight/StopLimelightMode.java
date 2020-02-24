@@ -5,19 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.collector;
+package frc.robot.commands.limelight;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
+import frc.robot.commands.drivetrain.SetDriveMode;
+import frc.robot.models.DriveMode;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class CollectorStopCollect extends SequentialCommandGroup {
+public class StopLimelightMode extends ParallelCommandGroup {
   /**
-   * Creates a new StopCollect.
+   * Creates a new StopLimelightMode.
    */
-  public CollectorStopCollect() {
-    // stops the collector spinning and brings it back in
-    addCommands(new CollectIn(0), new CollectorRetract());
+  public StopLimelightMode() {
+    // Add your commands in the super() call, e.g.
+    // super(new FooCommand(), new BarCommand());
+    addCommands(new SetDriveMode(DriveMode.Normal), new TurnLedsOff());
   }
 }

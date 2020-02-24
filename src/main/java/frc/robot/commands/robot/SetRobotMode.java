@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.climber;
+package frc.robot.commands.robot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
@@ -25,7 +25,7 @@ public class SetRobotMode extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.mode = this.robotMode;
+    Robot.robotMode = this.robotMode;
   }
 
   // Called every time the scheduler runs while the command is scheduled.

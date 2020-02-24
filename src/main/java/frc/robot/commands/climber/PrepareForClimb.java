@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.collector.CollectorRetract;
+import frc.robot.commands.robot.SetRobotMode;
 import frc.robot.models.RobotMode;
 
 public class PrepareForClimb extends CommandBase {
@@ -29,7 +30,8 @@ public class PrepareForClimb extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //Begins climb by bringing the collector in, launching the climber, and turning to climb mode
+    // Begins climb by bringing the collector in, launching the climber, and turning
+    // to climb mode
     new SequentialCommandGroup(
         // add turret at later date
         new CollectorRetract(), new ParallelCommandGroup(new ClimberRetract(), new SetRobotMode(RobotMode.Climb)));

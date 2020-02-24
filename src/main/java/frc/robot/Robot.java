@@ -11,16 +11,17 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.models.DriveMode;
 import frc.robot.models.RobotMode;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Serializer;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Tower;
 import frc.robot.subsystems.Turret;
-import frc.robot.commands.autos.SneakyPete;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -41,8 +42,9 @@ public class Robot extends TimedRobot {
   public static Tower tower = new Tower();
   public static Limelight limelight = new Limelight();
   public static Turret turret = new Turret();
+  public static Pneumatics pneumatics = new Pneumatics();
   public static OI oi;
-  public static RobotMode mode = RobotMode.Normal;
+  public static RobotMode robotMode = RobotMode.Normal;
 
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;

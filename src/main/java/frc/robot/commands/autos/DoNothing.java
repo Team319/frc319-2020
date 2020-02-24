@@ -5,27 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.serializer;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
+package frc.robot.commands.autos;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 
-public class SpinSerializer extends CommandBase {
-
-  private double serializerSetpoint = 0.75;
-
-  public SpinSerializer(double setpoint) {
-    addRequirements(Robot.serializer);
-    this.serializerSetpoint = setpoint;
+public class DoNothing extends CommandBase {
+  /**
+   * Creates a new DoNothing.
+   */
+  public DoNothing() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.shooter.set(ControlMode.PercentOutput, serializerSetpoint);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,12 +29,12 @@ public class SpinSerializer extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(final boolean interrupted) {
+  public void end(boolean interrupted) {
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

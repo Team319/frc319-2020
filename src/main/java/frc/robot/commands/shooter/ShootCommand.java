@@ -12,8 +12,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.serializer.SpinSerializer;
-import frc.robot.commands.tower.SpinTower;
+import frc.robot.commands.serializer.SerializeIn;
+import frc.robot.commands.tower.TowerUp;
 
 public class ShootCommand extends CommandBase {
   private double hoodSetpoint;
@@ -41,7 +41,7 @@ public class ShootCommand extends CommandBase {
     // tower and serializer spinning
     new SequentialCommandGroup(new ParallelCommandGroup(new HoodPosition(hoodSetpoint)),
         new ShooterClosedLoop(shooterSetpoint),
-        new ParallelCommandGroup(new SpinTower(towerSetpoint), new SpinSerializer(serializerSetpoint)));
+        new ParallelCommandGroup(new TowerUp(towerSetpoint), new SerializeIn(serializerSetpoint)));
   }
 
   // Called once the command ends or is interrupted.

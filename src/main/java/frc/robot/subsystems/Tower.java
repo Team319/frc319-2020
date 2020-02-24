@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
 
 public class Tower extends SubsystemBase {
   public CANSparkMax towerLead = new CANSparkMax(13, MotorType.kBrushless);
@@ -24,11 +25,13 @@ public class Tower extends SubsystemBase {
   }
 
   public void periodic() {
+    // double towerSetpoint = Robot.oi.operatorController.leftStick.getY();
+    // this.set(towerSetpoint);
   }
 
   public void set(double setpoint) {
-    towerLead.set(setpoint);
-    towerFollow.set(setpoint);
+    towerLead.set(-setpoint);
+    towerFollow.set(-setpoint);
 
   }
 }

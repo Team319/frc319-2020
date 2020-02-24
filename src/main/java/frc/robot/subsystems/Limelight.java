@@ -10,9 +10,9 @@ import frc.robot.utils.HelperFunctions;
 
 public class Limelight extends SubsystemBase {
 
-   private BobCircularBuffer limelightbuffer;
-
    private NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+
+   private BobCircularBuffer limelightbuffer;
    private NetworkTableEntry tx = table.getEntry("tx");
    private NetworkTableEntry ty = table.getEntry("ty");
    private NetworkTableEntry ta = table.getEntry("ta");
@@ -37,9 +37,7 @@ public class Limelight extends SubsystemBase {
    // private RotateToTarget pidR_ = new RotateToTarget(kPR, kIR, kDR);
 
    public Limelight() {
-
       this.limelightbuffer = new BobCircularBuffer(3);
-
    }
 
    public void execute() {
@@ -81,11 +79,14 @@ public class Limelight extends SubsystemBase {
    }
 
    public boolean setLedModeOn() {
+      System.out.println("turning LEDs on");
       return this.ledMode.setNumber(3);// 3 is Limelight LED force on
    }
 
    public boolean setLedModeOff() {
-      return this.ledMode.setNumber(1);// 1 is Limelight LED force off
+      System.out.println("turning LEDs off");
+      return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+      // return this.ledMode.setNumber(1);// 1 is Limelight LED force off
    }
 
    public double getFovX() {
@@ -98,11 +99,10 @@ public class Limelight extends SubsystemBase {
 
    public double getDistance() {
       double area = this.getArea();
-      double distance = Math.pow((area / 17.854), (1 / -2.272));
-      SmartDashboard.putNumber("Limelight Distance", distance);
+      SmartDashboard.putNumber("Limelight Distance", area);
       // System.out.println("Area" + area);
       // System.out.println("Distance in feet:" + distance);
-      return distance;
+      return area;
    }
 
    public boolean setStreamType() {
