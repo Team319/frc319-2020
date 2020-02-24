@@ -12,13 +12,13 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class SpinTower extends CommandBase {
+public class TowerUp extends CommandBase {
 
-  private double towerSetpoint = 0.75;
+  private double towerSetpoint;
 
-  public SpinTower(double setpoint) {
+  public TowerUp(double setpoint) {
     addRequirements(Robot.tower);
-    this.towerSetpoint = setpoint;
+    this.towerSetpoint = -setpoint;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -41,6 +41,6 @@ public class SpinTower extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

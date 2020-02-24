@@ -9,29 +9,32 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
-import frc.robot.commands.collector.SpinCollector;
-import frc.robot.commands.shooter.ShootCommand;
+import frc.robot.commands.collector.CollectIn;
+import frc.robot.commands.collector.CollectOut;
+import frc.robot.commands.limelight.StartLimelightMode;
+import frc.robot.commands.limelight.StopLimelightMode;
+import frc.robot.commands.robot.FeedShooter;
+import frc.robot.commands.robot.StopFeedShooter;
 import frc.robot.commands.shooter.ShooterClosedLoop;
-import frc.robot.commands.shooter.ShooterIdle;
 import frc.robot.commands.shooter.SpinShooter;
 import frc.robot.controllers.BobXboxController;
-import frc.robot.subsystems.Shooter;
 
 public class OI {
     public BobXboxController driverController;
+    public BobXboxController operatorController;
 
     public OI() {
         driverController = new BobXboxController(0, 0.2, 0.2);
+        operatorController = new BobXboxController(1, 0.2, 0.2);
 
-        driverController.yButton.whenPressed(new ShooterClosedLoop(0.2));
-        driverController.bButton.whenPressed(new SpinShooter(ControlMode.PercentOutput, 0));
-        driverController.aButton.whenPressed(new ShooterIdle(0.1));
+        driverController.rightTriggerButton.whenPressed(new FeedShooter());
+        driverController.rightTriggerButton.whenReleased(new StopFeedShooter());
+        driverController.leftTriggerButton.whenPressed(new StartLimelightMode());
+        driverController.leftTriggerButton.whenReleased(new StopLimelightMode());
 
-        // driverController.bButton.whenPressed(new
-        // SpinCollector(ControlMode.PercentOutput, 0.35));
-        // driverController.bButton.whenReleased(new
-        // SpinCollector(ControlMode.PercentOutput, 0.0));
-
+        operatorController.rightBumper.whenPressed(new CollectIn(0.8));
+        operatorController.rightBumper.whenReleased(new CollectIn(0));
+        operatorController.rightTriggerButton.whenPressed(new CollectIn(0.0));
     }
 
 }

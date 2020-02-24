@@ -5,25 +5,19 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.commands.limelight;
 
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.Robot;
 
-public class Pneumatics extends SubsystemBase {
-
-  private Compressor compressor = new Compressor(1);
-
-  /**
-   * Creates a new Pneumatics.
-   */
-  public Pneumatics() {
-    compressor.setClosedLoopControl(false);
+public class TurnLedsOn extends InstantCommand {
+  public TurnLedsOn() {
+    addRequirements(Robot.limelight);
   }
 
+  // Called when the command is initially scheduled.
   @Override
-  public void periodic() {
-
-    // This method will be called once per scheduler run
+  public void initialize() {
+    Robot.limelight.setLedModeOn();
   }
 }

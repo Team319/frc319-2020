@@ -18,6 +18,6 @@ public class CollectorStartCollect extends SequentialCommandGroup {
    */
   public CollectorStartCollect() {
     // extends collector and begins spinning
-    super(new CollectorExtend(), new SpinCollector(0));
+    addCommands(new CollectorExtend(), new CollectIn(0));
   }
 }

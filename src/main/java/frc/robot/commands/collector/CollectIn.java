@@ -12,12 +12,12 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class SpinCollector extends CommandBase {
+public class CollectIn extends CommandBase {
   private double collectorSetpoint;
 
-  public SpinCollector(double setpoint) {
+  public CollectIn(double setpoint) {
     addRequirements(Robot.collector);
-    this.collectorSetpoint = setpoint;
+    this.collectorSetpoint = -setpoint;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -40,6 +40,6 @@ public class SpinCollector extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
