@@ -9,8 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.models.BobTalonFX;
@@ -19,7 +18,7 @@ import frc.robot.models.PhoenixGains;
 
 public class Shooter extends SubsystemBase {
   double currentVelocity;
-
+  double maxVelocity = -21666;
   // private CANSparkMax hoodMotor = new CANSparkMax(5, MotorType.kBrushless);
   private BobTalonFX shooterLead = new BobTalonFX(6);
   private BobTalonFX shooterFollow = new BobTalonFX(7);
@@ -32,14 +31,16 @@ public class Shooter extends SubsystemBase {
    */
   public Shooter() {
 
-    this.shooterFollow.setInverted(true);
+    this.shooterLead.setInverted(true);
+    this.shooterFollow.setInverted(false);
+
     this.shooterLead.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     this.shooterLead.configClosedloopRamp(0.25);
     this.shooterLead.configMotionParameters(shooterMotionParameters);
   }
 
   public double getVelocity() {
-    return this.shooterLead.getSelectedSensorVelocity();
+    return this.shooterLead.getSelectedSensorVelocity() / maxVelocity;
 
   }
 
@@ -57,15 +58,21 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Shooter Velocity", Math.abs(this.getVelocity()));
-    SmartDashboard.putNumber("Shooter Velocity Text", Math.abs(this.getVelocity()));
-    SmartDashboard.putNumber("Current Draw", this.getCurrentDraw());
-    SmartDashboard.putNumber("Voltage Output", Math.abs(this.getVoltageOutput()));
+    // SmartDashboard.putNumber("Shooter Velocity", Math.abs(this.getVelocity()));
+    // SmartDashboard.putNumber("Shooter Velocity Text",
+    // Math.abs(this.getVelocity()));
+    // SmartDashboard.putNumber("Current Draw", this.getCurrentDraw());
+    // SmartDashboard.putNumber("Voltage Output",
+    // Math.abs(this.getVoltageOutput()));
   }
 
   public void set(ControlMode controlMode, double setpoint) {
-    shooterLead.set(controlMode, -setpoint);
-    shooterFollow.set(controlMode, -setpoint);
+    shooterLead.set(controlMode, setpoint);
+    shooterFollow.set(controlMode, setpoint);
+  }
+
+  public void setPercentVelocity(double percentVelocity) {
+    this.set(ControlMode.Velocity, this.maxVelocity * percentVelocity);
   }
 
   // public void setHood(double setpoint) {

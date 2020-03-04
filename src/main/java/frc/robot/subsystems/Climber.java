@@ -14,6 +14,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
+import frc.robot.models.RobotMode;
 
 public class Climber extends SubsystemBase {
   double climberIncriment = 100;
@@ -21,8 +22,6 @@ public class Climber extends SubsystemBase {
 
   public CANSparkMax climberLead = new CANSparkMax(8, MotorType.kBrushless);
   public CANSparkMax climberFollow = new CANSparkMax(9, MotorType.kBrushless);
-
-  // public DoubleSolenoid climberSolenoid = new DoubleSolenoid(4, 5);
 
   /**
    * Creates a new Climber.
@@ -38,14 +37,6 @@ public class Climber extends SubsystemBase {
     this.climberFollow.setOpenLoopRampRate(0.25);
   }
 
-  public void climberExtend() {
-    // this.climberSolenoid.set(DoubleSolenoid.Value.kForward);
-  }
-
-  public void climberRetract() {
-    // this.climberSolenoid.set(DoubleSolenoid.Value.kReverse);
-  }
-
   @Override
   public void periodic() {
     /*
@@ -54,13 +45,15 @@ public class Climber extends SubsystemBase {
      * (climbersetpoint >= climberBottom && input <= 0) {
      * this.setClimber(climbersetpoint); } else { new DoNothing(); }
      */
-    double input = -Robot.oi.operatorController.rightStick.getY();
-    if (input <= 0) {
-      this.setClimber(input * 0.75);
-      SmartDashboard.putNumber("Climber Lead Current:", this.climberLead.getOutputCurrent());
-      SmartDashboard.putNumber("Climber Follow Current:", this.climberFollow.getOutputCurrent());
-    } else {
-      this.setClimber(input * 0.5);
+    if (Robot.robotMode == RobotMode.Climb) {
+      double input = -Robot.oi.operatorController.rightStick.getY();
+      if (input <= 0) {
+        this.setClimber(input * 0.75);
+        SmartDashboard.putNumber("Climber Lead Current:", this.climberLead.getOutputCurrent());
+        SmartDashboard.putNumber("Climber Follow Current:", this.climberFollow.getOutputCurrent());
+      } else {
+        this.setClimber(input * 0.5);
+      }
     }
   }
 

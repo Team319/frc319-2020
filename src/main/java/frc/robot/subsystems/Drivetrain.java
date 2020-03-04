@@ -18,6 +18,7 @@ import frc.robot.models.DriveMode;
 import frc.robot.models.DriveSignal;
 import frc.robot.models.PhoenixGains;
 import frc.robot.utils.BobDriveHelper;
+import frc.robot.utils.HelperFunctions;
 
 public class Drivetrain extends SubsystemBase {
 
@@ -37,7 +38,7 @@ public class Drivetrain extends SubsystemBase {
   BobDriveHelper helper;
   private double quickTurnThreshold = 0.2;
 
-  private PIDController limelightRotatePID = new PIDController(0.5, 0.0, 0.0);
+  private PIDController limelightRotatePID = new PIDController(1.0, 0.0, 0.01);
 
   public Drivetrain() {
 
@@ -58,6 +59,11 @@ public class Drivetrain extends SubsystemBase {
     rightLead.setInverted(false);
     rightFollow.setInverted(false);
     rightLead.setSensorPhase(true);
+
+    leftLead.configOpenloopRamp(0.25);
+    leftFollow.configOpenloopRamp(0.25);
+    rightLead.configOpenloopRamp(0.25);
+    rightFollow.configOpenloopRamp(0.25);
   }
 
   public void configGains(PhoenixGains gains) {
@@ -84,6 +90,9 @@ public class Drivetrain extends SubsystemBase {
 
   @Override
   public void periodic() {
+  }
+
+  public void teleopDrive() {
     double rotateValue = 0.0;
     double moveValue = 0.0;
     boolean quickTurn = false;
@@ -93,8 +102,10 @@ public class Drivetrain extends SubsystemBase {
 
     if (this.mode == DriveMode.Normal) {
       rotateValue = Robot.oi.driverController.rightStick.getX();
+      rotateValue = HelperFunctions.signedSquare(rotateValue);
     } else if (this.mode == DriveMode.Limelight) {
-      rotateValue = -limelightRotatePID.calculate(Robot.limelight.getX());
+      rotateValue = -limelightRotatePID.calculate(Robot.limelight.getXProportional());
+      rotateValue = HelperFunctions.limit(rotateValue, -0.25, 0.25);
     }
 
     DriveSignal driveSignal = helper.cheesyDrive(moveValue, rotateValue, quickTurn, false);
@@ -103,6 +114,13 @@ public class Drivetrain extends SubsystemBase {
 
     SmartDashboard.putNumber("Rotate Value", rotateValue);
     SmartDashboard.putNumber("Move Value", moveValue);
+  }
+
+  public void setDrivetrain(ControlMode controlMode, Double percentOutput) {
+    this.leftLead.set(controlMode, percentOutput);
+    this.leftFollow.set(controlMode, percentOutput);
+    this.rightLead.set(controlMode, percentOutput);
+    this.rightFollow.set(controlMode, percentOutput);
 
   }
 }

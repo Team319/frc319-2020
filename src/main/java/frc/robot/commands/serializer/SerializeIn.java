@@ -7,40 +7,22 @@
 
 package frc.robot.commands.serializer;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
 
-public class SerializeIn extends CommandBase {
+public class SerializeIn extends InstantCommand {
 
   private double serializerSetpoint;
 
   public SerializeIn(double setpoint) {
     addRequirements(Robot.serializer);
-    this.serializerSetpoint = -setpoint;
+    this.serializerSetpoint = setpoint;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.serializer.set(serializerSetpoint);
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(final boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return true;
+    Robot.serializer.set(serializerSetpoint, -serializerSetpoint * 0.5);
   }
 }

@@ -7,11 +7,14 @@
 
 package frc.robot;
 
+import java.rmi.activation.ActivationGroupDesc.CommandEnvironment;
+
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.models.DriveMode;
 import frc.robot.models.RobotMode;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
@@ -22,6 +25,13 @@ import frc.robot.subsystems.Serializer;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Tower;
 import frc.robot.subsystems.Turret;
+import frc.robot.commands.autos.DriveForwardFiveFeet;
+import frc.robot.commands.autos.SneakyPete;
+import frc.robot.commands.drivetrain.BobDrive;
+import frc.robot.commands.autos.ShootAndDontMove;
+import frc.robot.commands.autos.ShootAndPushAuto;
+import frc.robot.commands.autos.BasicShootAuto;
+import frc.robot.commands.autos.DoNothing;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,7 +41,7 @@ import frc.robot.subsystems.Turret;
  * project.
  */
 public class Robot extends TimedRobot {
-  SendableChooser<String> autoChooser;
+  SendableChooser<Command> autoChooser;
   Command autonomousCommand;
 
   public static Shooter shooter = new Shooter();
@@ -47,6 +57,7 @@ public class Robot extends TimedRobot {
   public static RobotMode robotMode = RobotMode.Normal;
 
   private Command m_autonomousCommand;
+  private Command m_teleopCommand = new BobDrive();
   private RobotContainer m_robotContainer;
 
   /**
@@ -60,10 +71,22 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     oi = new OI();
+    limelight.enableSecondaryCameraStream();
 
-    autoChooser = new SendableChooser<String>();
-    autoChooser.setDefaultOption("Do Nothing", "None");
-    autoChooser.addOption("Sneaky Pete", "SneakyPete");
+    SmartDashboard.putNumber("Auto Delay", 0);
+    SmartDashboard.putNumber("Auto Drive Time", 1);
+
+    autoChooser = new SendableChooser<Command>();
+    autoChooser.setDefaultOption("Do Nothing", new DoNothing());
+    // autoChooser.addOption("Sneaky Pete", "SneakyPete");
+    // autoChooser.addOption("Off Line", "DriveForwardFiveFeet");
+    autoChooser.addOption("Litteraly Just Shoot Thank You", new ShootAndDontMove());
+    autoChooser.setDefaultOption("Shoot And Move", new BasicShootAuto());
+    autoChooser.addOption("Shoot and Push", new ShootAndPushAuto());
+
+    SmartDashboard.putData("Autonomous Chooser", autoChooser);
+
+    limelight.setLedModeOff();
   }
 
   /**
@@ -96,6 +119,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
+    limelight.enableSecondaryCameraStream();
+    limelight.setLedModeOff();
   }
 
   /**
@@ -104,7 +129,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    limelight.enableSecondaryCameraStream();
+    m_autonomousCommand = autoChooser.getSelected();
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
@@ -117,10 +143,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    limelight.enableSecondaryCameraStream();
   }
 
   @Override
   public void teleopInit() {
+    limelight.enableSecondaryCameraStream();
+
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -128,6 +157,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    m_teleopCommand.schedule();
   }
 
   /**
@@ -135,6 +165,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    limelight.enableSecondaryCameraStream();
   }
 
   @Override

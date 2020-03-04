@@ -5,23 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.shooter;
+package frc.robot.commands.autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.oi.RumbleDriverController;
-import frc.robot.commands.oi.RumbleOperatorController;
-import frc.robot.commands.pneumatics.DisableCompressor;
-import frc.robot.commands.robot.FeedShooter;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.drivetrain.DriveCommand;
+import frc.robot.commands.robot.StopShooting;
+import frc.robot.commands.shooter.ShootCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class ShootCommand extends SequentialCommandGroup {
+public class BasicShootAuto extends SequentialCommandGroup {
   /**
-   * Creates a new ShootCommand.
+   * Creates a new BasicShootAuto.
    */
-  public ShootCommand(double shooterSetpoint) {
-    addCommands(new DisableCompressor(), new SetShooterVelocity(shooterSetpoint),
-        new WaitForShooterVelocity(shooterSetpoint, 0.0, 1.0), new FeedShooter());
+  public BasicShootAuto() {
+    // Add your commands in the super() call, e.g.
+    // super(new FooCommand(), new BarCommand());
+    addCommands(new AutoDriveTime(), new ShootCommand(0.5), new WaitCommand(3), new StopShooting(),
+        new DriveCommand(0.15), new AutoDriveTime(), new DriveCommand(0));
   }
 }

@@ -7,17 +7,21 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
-import frc.robot.commands.collector.CollectIn;
 import frc.robot.commands.collector.CollectOut;
+import frc.robot.commands.collector.CollectorStartCollect;
+import frc.robot.commands.collector.CollectorStopCollect;
+import frc.robot.commands.collector.StopCollecting;
 import frc.robot.commands.limelight.StartLimelightMode;
 import frc.robot.commands.limelight.StopLimelightMode;
-import frc.robot.commands.robot.FeedShooter;
-import frc.robot.commands.robot.StopFeedShooter;
-import frc.robot.commands.shooter.ShooterClosedLoop;
-import frc.robot.commands.shooter.SpinShooter;
+import frc.robot.commands.robot.Preload;
+import frc.robot.commands.robot.SetRobotMode;
+import frc.robot.commands.robot.StopPreload;
+import frc.robot.commands.robot.StopShooting;
+import frc.robot.commands.robot.StopUnjam;
+import frc.robot.commands.robot.Unjam;
+import frc.robot.commands.shooter.ShootCommand;
 import frc.robot.controllers.BobXboxController;
+import frc.robot.models.RobotMode;
 
 public class OI {
     public BobXboxController driverController;
@@ -27,14 +31,32 @@ public class OI {
         driverController = new BobXboxController(0, 0.2, 0.2);
         operatorController = new BobXboxController(1, 0.2, 0.2);
 
-        driverController.rightTriggerButton.whenPressed(new FeedShooter());
-        driverController.rightTriggerButton.whenReleased(new StopFeedShooter());
+        // Driver Controls
+        driverController.rightTriggerButton.whenPressed(new ShootCommand(0.55));
+        driverController.rightTriggerButton.whenReleased(new StopShooting());
+
         driverController.leftTriggerButton.whenPressed(new StartLimelightMode());
         driverController.leftTriggerButton.whenReleased(new StopLimelightMode());
 
-        operatorController.rightBumper.whenPressed(new CollectIn(0.8));
-        operatorController.rightBumper.whenReleased(new CollectIn(0));
-        operatorController.rightTriggerButton.whenPressed(new CollectIn(0.0));
+        driverController.rightBumper.whenPressed(new CollectorStartCollect());
+        driverController.bButton.whenPressed(new CollectorStopCollect());
+        driverController.leftBumper.whenPressed(new StopCollecting());
+
+        // Operator Controls
+        operatorController.rightBumper.whenPressed(new CollectorStartCollect());
+        operatorController.leftTriggerButton.whenPressed(new StopCollecting());
+        operatorController.leftBumper.whenPressed(new CollectOut(0.5));
+        operatorController.leftBumper.whenReleased(new CollectOut(0));
+
+        operatorController.rightTriggerButton.whenPressed(new CollectorStopCollect());
+
+        operatorController.startButton.whenPressed(new SetRobotMode(RobotMode.Climb));
+
+        operatorController.bButton.whenPressed(new Unjam());
+        operatorController.bButton.whenReleased(new StopUnjam());
+
+        operatorController.aButton.whenPressed(new Preload());
+        operatorController.aButton.whenReleased(new StopPreload());
     }
 
 }

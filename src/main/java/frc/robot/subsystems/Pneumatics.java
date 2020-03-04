@@ -18,12 +18,20 @@ public class Pneumatics extends SubsystemBase {
    * Creates a new Pneumatics.
    */
   public Pneumatics() {
-    compressor.setClosedLoopControl(false);
+    compressor.setClosedLoopControl(true);
   }
 
   @Override
   public void periodic() {
 
     // This method will be called once per scheduler run
+  }
+
+  public void enableCompressor() {
+    compressor.setClosedLoopControl(true);
+  }
+
+  public void disableCompressor() {
+    compressor.setClosedLoopControl(false);
   }
 }

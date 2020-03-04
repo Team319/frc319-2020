@@ -5,23 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.shooter;
+package frc.robot.commands.pneumatics;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.oi.RumbleDriverController;
-import frc.robot.commands.oi.RumbleOperatorController;
-import frc.robot.commands.pneumatics.DisableCompressor;
-import frc.robot.commands.robot.FeedShooter;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.Robot;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class ShootCommand extends SequentialCommandGroup {
-  /**
-   * Creates a new ShootCommand.
-   */
-  public ShootCommand(double shooterSetpoint) {
-    addCommands(new DisableCompressor(), new SetShooterVelocity(shooterSetpoint),
-        new WaitForShooterVelocity(shooterSetpoint, 0.0, 1.0), new FeedShooter());
+public class EnableCompressor extends InstantCommand {
+  public EnableCompressor() {
+    addRequirements(Robot.pneumatics);
+    // Use addRequirements() here to declare subsystem dependencies.
+  }
+
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
+    Robot.pneumatics.enableCompressor();
   }
 }
