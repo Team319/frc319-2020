@@ -5,20 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.climber;
+package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.collector.CollectorRetract;
-import frc.robot.commands.robot.SetRobotMode;
-import frc.robot.models.RobotMode;
+import frc.robot.commands.serializer.SerializeIn;
+import frc.robot.commands.tower.TowerUp;
 
-public class PrepareForClimb extends CommandBase {
+public class ShootCommandold extends CommandBase {
+  private double hoodSetpoint;
+  private double towerSetpoint;
+  private double shooterSetpoint;
+  private double serializerSetpoint;
+
   /**
-   * Creates a new PrepareForClimb.
+   * Creates a new ShootClose.
    */
-  public PrepareForClimb() {
+  public ShootCommandold(double hoodSetpoint, double shooterSetpoint, double towerSetpoint, double serializerSetpoint) {
+
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -30,11 +35,11 @@ public class PrepareForClimb extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // Begins climb by bringing the collector in, launching the climber, and turning
-    // to climb mode
-    new SequentialCommandGroup(
-        // add turret at later date
-        new CollectorRetract(), new ParallelCommandGroup(new ClimberRetract(), new SetRobotMode(RobotMode.Climb)));
+    // sets the hood possition, begins the shooter spinning, and starts both the
+    // tower and serializer spinning
+    new SequentialCommandGroup(new ParallelCommandGroup(new HoodPosition(hoodSetpoint)),
+        new SetShooterVelocity(shooterSetpoint),
+        new ParallelCommandGroup(new TowerUp(towerSetpoint), new SerializeIn(serializerSetpoint)));
   }
 
   // Called once the command ends or is interrupted.

@@ -10,7 +10,6 @@ package frc.robot.commands.robot;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.collector.CollectIn;
 import frc.robot.commands.serializer.SerializeIn;
-import frc.robot.commands.shooter.ShooterClosedLoop;
 import frc.robot.commands.tower.TowerUp;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -21,6 +20,6 @@ public class FeedShooter extends ParallelCommandGroup {
    * Creates a new FeedShooter.
    */
   public FeedShooter() {
-    addCommands(new ShooterClosedLoop(0.75), new CollectIn(0.8), new SerializeIn(1), new TowerUp(1));
+    addCommands(new CollectIn(0.8), new SerializeIn(1), new TowerUp(1));
   }
 }

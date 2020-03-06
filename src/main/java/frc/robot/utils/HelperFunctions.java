@@ -84,4 +84,12 @@ public final class HelperFunctions {
 
         return max;
     }
+
+    public static double signedSquare(double input) {
+        if (input < 0) {
+            return -(input * input);
+        } else {
+            return input * input;
+        }
+    }
 }

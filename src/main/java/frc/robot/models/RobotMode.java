@@ -11,5 +11,5 @@ package frc.robot.models;
  * Add your docs here.
  */
 public enum RobotMode {
-    Normal, Climb, Limelight
+    Normal, Climb, Limelight, Auto
 }

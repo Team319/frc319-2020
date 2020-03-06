@@ -7,12 +7,11 @@
 
 package frc.robot.commands.collector;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
+import frc.robot.commands.oi.RumbleOperatorController;
 
-public class CollectIn extends CommandBase {
+public class CollectIn extends InstantCommand {
   private double collectorSetpoint;
 
   public CollectIn(double setpoint) {
@@ -24,22 +23,11 @@ public class CollectIn extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.collector.setCollector(ControlMode.PercentOutput, collectorSetpoint);
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(final boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return true;
+    Robot.collector.setCollector(collectorSetpoint);
+    if (collectorSetpoint > 0) {
+      Robot.collector.collecting = true;
+    } else {
+      Robot.collector.collecting = false;
+    }
   }
 }

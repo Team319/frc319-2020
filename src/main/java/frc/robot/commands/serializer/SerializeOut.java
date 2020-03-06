@@ -5,38 +5,24 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.climber;
+package frc.robot.commands.serializer;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
 
-public class ClimberExtend extends CommandBase {
-  /**
-   * Creates a new ClimberExtended.
-   */
-  public ClimberExtend() {
+public class SerializeOut extends InstantCommand {
+
+  private double serializerSetpoint;
+
+  public SerializeOut(double setpoint) {
+    addRequirements(Robot.serializer);
+    this.serializerSetpoint = setpoint;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    Robot.climber.climberExtend();
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
+    Robot.serializer.set(-serializerSetpoint * 0.5, serializerSetpoint);
   }
 }

@@ -7,8 +7,6 @@
 
 package frc.robot.commands.collector;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
@@ -24,7 +22,7 @@ public class CollectOut extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.collector.setCollector(ControlMode.PercentOutput, collectorSetpoint);
+    Robot.collector.setCollector(collectorSetpoint);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

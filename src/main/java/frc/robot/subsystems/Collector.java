@@ -7,38 +7,50 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 
 public class Collector extends SubsystemBase {
-  private final CANSparkMax collectorLead = new CANSparkMax(10, MotorType.kBrushless);
-  // private DoubleSolenoid collectorSolenoid = new DoubleSolenoid(2, 3);
+  public boolean collecting = false;
+  private CANSparkMax collectorLead = new CANSparkMax(10, MotorType.kBrushless);
+  private CANSparkMax collectorFollow = new CANSparkMax(15, MotorType.kBrushless);
+  private DoubleSolenoid collectorSolenoid = new DoubleSolenoid(1, 0, 1);
 
   /**
    * Creates a new Collector.
    */
   public Collector() {
+    collectorLead.setSmartCurrentLimit(25);
+    collectorLead.setSmartCurrentLimit(25);
+    collectorFollow.setInverted(true);
+    collectorLead.setInverted(false);
   }
 
   public void collectorExtend() {
-    // this.collectorSolenoid.set(DoubleSolenoid.Value.kForward);
+    System.out.println("Collector ");
+    this.collectorSolenoid.set(DoubleSolenoid.Value.kForward);
   }
 
   public void collectorRetract() {
-    // this.collectorSolenoid.set(DoubleSolenoid.Value.kReverse);
+    this.collectorSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
   @Override
   public void periodic() {
+    SmartDashboard.putBoolean("Collecting", collecting);
     // This method will be called once per scheduler run
   }
 
-  public void setCollector(ControlMode controlMode, double setpoint) {
+  public void setCollector(double setpoint) {
+    double rumble = Math.abs(setpoint);
+    Robot.oi.driverController.setRumble(rumble, rumble);
+    Robot.oi.operatorController.setRumble(rumble, rumble);
     collectorLead.set(setpoint);
+    collectorFollow.set(setpoint);
   }
 }

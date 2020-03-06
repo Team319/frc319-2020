@@ -5,35 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.shooter;
+package frc.robot.commands.autos;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 
-public class ShooterClosedLoop extends CommandBase {
-  double maxVelocity = -21666;
-  double percentage;
+public class AutoDelay extends CommandBase {
+  private double delaySeconds = 0;
+  private Timer timer = new Timer();
 
-  /**
-   * Creates a new ShooterClosedLoop.
-   */
-  public ShooterClosedLoop(double p) {
-    addRequirements(Robot.shooter);
+  public AutoDelay() {
     // Use addRequirements() here to declare subsystem dependencies.
-    percentage = p;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    delaySeconds = SmartDashboard.getNumber("Auto Delay", 0);
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.shooter.set(ControlMode.Velocity, maxVelocity * percentage);
   }
 
   // Called once the command ends or is interrupted.
@@ -44,6 +40,7 @@ public class ShooterClosedLoop extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    boolean hasTimeElapsed = timer.get() >= delaySeconds;
+    return hasTimeElapsed;
   }
 }

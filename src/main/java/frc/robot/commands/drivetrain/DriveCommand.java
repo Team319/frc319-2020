@@ -5,23 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.collector;
+package frc.robot.commands.drivetrain;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
 
-public class CollectorRetract extends InstantCommand {
+public class DriveCommand extends InstantCommand {
+  double percent;
+
   /**
-   * Creates a new CollectorRetract.
+   * Creates a new DriveCommand.
    */
-  public CollectorRetract() {
-    addRequirements(Robot.collector);
-    // Use addRequirements() here to declare subsystem dependencies.
+  public DriveCommand(double percent) {
+    this.percent = percent;
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.collector.collectorRetract();
+    Robot.drivetrain.setDrivetrain(ControlMode.PercentOutput, percent);
   }
 }

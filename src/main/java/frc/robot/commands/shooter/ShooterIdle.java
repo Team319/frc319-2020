@@ -7,12 +7,8 @@
 
 package frc.robot.commands.shooter;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
-import frc.robot.subsystems.Shooter;
 
 public class ShooterIdle extends CommandBase {
   boolean firstTime;

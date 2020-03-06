@@ -8,6 +8,8 @@
 package frc.robot.commands.collector;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.oi.RumbleDriverController;
+import frc.robot.commands.oi.RumbleOperatorController;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -18,6 +20,6 @@ public class CollectorStartCollect extends SequentialCommandGroup {
    */
   public CollectorStartCollect() {
     // extends collector and begins spinning
-    addCommands(new CollectorExtend(), new CollectIn(0));
+    addCommands(new CollectorExtend(), new CollectIn(1));
   }
 }

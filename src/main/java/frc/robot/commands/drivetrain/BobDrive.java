@@ -12,21 +12,16 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.models.DriveSignal;
 import frc.robot.Robot;
 import frc.robot.utils.BobDriveHelper;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * Add your docs here.
  */
 public class BobDrive extends CommandBase {
-    BobDriveHelper helper;
-    private double quickTurnThreshold = 0.2;
 
     public BobDrive() {
         addRequirements(Robot.drivetrain);
-        helper = new BobDriveHelper();
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -36,16 +31,7 @@ public class BobDrive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     public void execute() {
-        double rotateValue = 0;
-
-        // System.out.println("Drivetrain Mode" + Robot.drivetrain.mode);
-
-        rotateValue = Robot.oi.driverController.rightStick.getX();
-
-        double moveValue = -Robot.oi.driverController.leftStick.getY();
-        boolean quickTurn = (moveValue < quickTurnThreshold && moveValue > -quickTurnThreshold);
-        DriveSignal driveSignal = helper.cheesyDrive(moveValue, rotateValue, quickTurn, false);
-        Robot.drivetrain.drive(ControlMode.PercentOutput, driveSignal);
+        Robot.drivetrain.teleopDrive();
     }
 
     public boolean isFinished() {
@@ -56,5 +42,6 @@ public class BobDrive extends CommandBase {
     }
 
     protected void interrupted() {
+        SmartDashboard.putBoolean("Drive Command Interrupted", true);
     }
 }

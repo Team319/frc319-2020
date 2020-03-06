@@ -30,6 +30,9 @@ public class Tower extends SubsystemBase {
   }
 
   public void set(double setpoint) {
+    double rumble = Math.abs(setpoint);
+    // Robot.oi.driverController.setRumble(rumble, rumble);
+    // Robot.oi.operatorController.setRumble(rumble, rumble);
     towerLead.set(-setpoint);
     towerFollow.set(-setpoint);
 
