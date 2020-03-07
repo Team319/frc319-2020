@@ -11,7 +11,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Robot;
 
 public class Tower extends SubsystemBase {
   public CANSparkMax towerLead = new CANSparkMax(13, MotorType.kBrushless);
@@ -30,7 +29,7 @@ public class Tower extends SubsystemBase {
   }
 
   public void set(double setpoint) {
-    double rumble = Math.abs(setpoint);
+    // double rumble = Math.abs(setpoint);
     // Robot.oi.driverController.setRumble(rumble, rumble);
     // Robot.oi.operatorController.setRumble(rumble, rumble);
     towerLead.set(-setpoint);

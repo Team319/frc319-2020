@@ -15,23 +15,16 @@ public class ShooterIdle extends CommandBase {
   double percentage;
   double maxVelocity = -21666;
 
-  /**
-   * Creates a new SafelySlowDownShooter.
-   */
   public ShooterIdle(double p) {
     addRequirements(Robot.shooter);
     percentage = p;
-
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     firstTime = true;
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     // due to issues slowing down, allows the shooter to coast to the selected
@@ -44,12 +37,10 @@ public class ShooterIdle extends CommandBase {
      */
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

@@ -19,20 +19,14 @@ public class ShootCommandold extends CommandBase {
   private double shooterSetpoint;
   private double serializerSetpoint;
 
-  /**
-   * Creates a new ShootClose.
-   */
   public ShootCommandold(double hoodSetpoint, double shooterSetpoint, double towerSetpoint, double serializerSetpoint) {
 
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     // sets the hood possition, begins the shooter spinning, and starts both the
@@ -42,12 +36,10 @@ public class ShootCommandold extends CommandBase {
         new ParallelCommandGroup(new TowerUp(towerSetpoint), new SerializeIn(serializerSetpoint)));
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

@@ -7,14 +7,16 @@
 
 package frc.robot;
 
-import java.rmi.activation.ActivationGroupDesc.CommandEnvironment;
-
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.autos.BasicShootAuto;
+import frc.robot.commands.autos.DoNothing;
+import frc.robot.commands.autos.ShootAndDontMove;
+import frc.robot.commands.autos.ShootAndPushAuto;
+import frc.robot.commands.drivetrain.BobDrive;
 import frc.robot.models.RobotMode;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
@@ -25,13 +27,6 @@ import frc.robot.subsystems.Serializer;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Tower;
 import frc.robot.subsystems.Turret;
-import frc.robot.commands.autos.DriveForwardFiveFeet;
-import frc.robot.commands.autos.SneakyPete;
-import frc.robot.commands.drivetrain.BobDrive;
-import frc.robot.commands.autos.ShootAndDontMove;
-import frc.robot.commands.autos.ShootAndPushAuto;
-import frc.robot.commands.autos.BasicShootAuto;
-import frc.robot.commands.autos.DoNothing;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -58,7 +53,7 @@ public class Robot extends TimedRobot {
 
   private Command m_autonomousCommand;
   private Command m_teleopCommand = new BobDrive();
-  private RobotContainer m_robotContainer;
+  // private RobotContainer m_robotContainer;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -69,7 +64,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
+    // m_robotContainer = new RobotContainer();
     oi = new OI();
     limelight.enableSecondaryCameraStream();
 

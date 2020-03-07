@@ -12,9 +12,6 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 
-/**
- * Add your docs here.
- */
 public class BobSparkMaxBrushless extends CANSparkMax {
     private CANPIDController _pidController;
 

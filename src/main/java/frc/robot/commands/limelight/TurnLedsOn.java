@@ -15,7 +15,6 @@ public class TurnLedsOn extends InstantCommand {
     addRequirements(Robot.limelight);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     Robot.limelight.setLedModeOn();

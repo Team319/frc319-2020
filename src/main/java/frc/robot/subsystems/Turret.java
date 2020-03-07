@@ -7,12 +7,8 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANPIDController;
-import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 import frc.robot.models.BobSparkMaxBrushless;
@@ -27,9 +23,6 @@ public class Turret extends SubsystemBase {
   double setpoint;
   double degreesOff;
 
-  /**
-   * Creates a new Turret.
-   */
   public Turret() {
     turretLead.configMotionParameters(motionParameters);
   }

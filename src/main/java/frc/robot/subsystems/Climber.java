@@ -23,9 +23,6 @@ public class Climber extends SubsystemBase {
   public CANSparkMax climberLead = new CANSparkMax(8, MotorType.kBrushless);
   public CANSparkMax climberFollow = new CANSparkMax(9, MotorType.kBrushless);
 
-  /**
-   * Creates a new Climber.
-   */
   public Climber() {
     this.climberFollow.setInverted(true);
     this.climberLead.setInverted(false);
@@ -61,6 +58,5 @@ public class Climber extends SubsystemBase {
     climberLead.set(setpoint);
     climberFollow.set(setpoint);
   }
-  // This method will be called once per scheduler run
 
 }

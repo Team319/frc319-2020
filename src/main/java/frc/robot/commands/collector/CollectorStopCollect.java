@@ -11,15 +11,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.oi.RumbleDriverController;
 import frc.robot.commands.oi.RumbleOperatorController;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class CollectorStopCollect extends SequentialCommandGroup {
-  /**
-   * Creates a new StopCollect.
-   */
   public CollectorStopCollect() {
-    // stops the collector spinning and brings it back in
     addCommands(new RumbleDriverController(0.0), new RumbleOperatorController(0.0), new CollectIn(0),
         new CollectorRetract());
   }

@@ -9,16 +9,8 @@ package frc.robot.commands.collector;
 
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class StopCollecting extends ParallelRaceGroup {
-  /**
-   * Creates a new StopCollecting.
-   */
   public StopCollecting() {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());
     addCommands(new CollectIn(0));
   }
 }

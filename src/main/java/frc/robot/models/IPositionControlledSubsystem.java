@@ -7,9 +7,6 @@
 
 package frc.robot.models;
 
-/**
- * Add your docs here.
- */
 public interface IPositionControlledSubsystem {
 
     public int targetPosition = 0;

@@ -13,16 +13,12 @@ import frc.robot.Robot;
 public class SetShooterVelocity extends InstantCommand {
   double percentage;
 
-  /**
-   * Creates a new ShooterClosedLoop.
-   */
   public SetShooterVelocity(double p) {
     addRequirements(Robot.shooter);
 
     percentage = p;
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     Robot.shooter.setPercentVelocity(percentage);

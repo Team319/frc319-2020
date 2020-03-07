@@ -7,9 +7,6 @@
 
 package frc.robot.models;
 
-/**
- * Add your docs here.
- */
 public class DriveSignal {
     protected double mLeftMotor;
     protected double mRightMotor;

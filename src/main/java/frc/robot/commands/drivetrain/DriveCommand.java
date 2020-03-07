@@ -15,9 +15,6 @@ import frc.robot.Robot;
 public class DriveCommand extends InstantCommand {
   double percent;
 
-  /**
-   * Creates a new DriveCommand.
-   */
   public DriveCommand(double percent) {
     this.percent = percent;
   }

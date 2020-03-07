@@ -17,10 +17,8 @@ public class SerializeIn extends InstantCommand {
   public SerializeIn(double setpoint) {
     addRequirements(Robot.serializer);
     this.serializerSetpoint = setpoint;
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     Robot.serializer.set(serializerSetpoint, -serializerSetpoint * 0.5);
