@@ -90,8 +90,8 @@ public class BobTalonSRX extends TalonSRX {
 		return eCode;
 	}
 
-	public ErrorCode configPIDF(PhoenixGains gains) {
-		return this.configPIDF(gains.parameterSlot, gains.P, gains.I, gains.D, gains.F, gains.iZone);
+	public ErrorCode configPIDF(PidGains gains) {
+		return this.configPIDF(gains.slot, gains.P, gains.I, gains.D, gains.F, gains.iZone);
 	}
 
 	public void configMotionParameters(MotionParameters parameters) {
@@ -101,13 +101,13 @@ public class BobTalonSRX extends TalonSRX {
 	}
 
 	public void selectMotionParameters(MotionParameters parameters) {
-		this.selectProfileSlot(parameters.getGains().parameterSlot);
+		this.selectProfileSlot(parameters.getGains().slot);
 		this.configMotionAcceleration(parameters.getAcceleration());
 		this.configMotionCruiseVelocity(parameters.getCruiseVelocity());
 	}
 
-	public ErrorCode setGains(PhoenixGains gains) {
-		return this.configPIDF(gains.parameterSlot, gains.P, gains.I, gains.D, gains.F, gains.iZone);
+	public ErrorCode setGains(PidGains gains) {
+		return this.configPIDF(gains.slot, gains.P, gains.I, gains.D, gains.F, gains.iZone);
 	}
 
 	public void configPrimaryFeedbackDevice(FeedbackDevice feedbackDevice) {

@@ -16,7 +16,7 @@ import frc.robot.Robot;
 import frc.robot.models.BobTalonFX;
 import frc.robot.models.DriveMode;
 import frc.robot.models.DriveSignal;
-import frc.robot.models.PhoenixGains;
+import frc.robot.models.PidGains;
 import frc.robot.utils.BobDriveHelper;
 import frc.robot.utils.HelperFunctions;
 
@@ -27,8 +27,8 @@ public class Drivetrain extends SubsystemBase {
   public static int DRIVE_PROFILE = 0;
   public static int ROTATION_PROFILE = 1;
 
-  private PhoenixGains driveGains = new PhoenixGains(DRIVE_PROFILE, 0.0, 0.0, 0.0, 0.0, 0);
-  private PhoenixGains rotationGains = new PhoenixGains(ROTATION_PROFILE, 0.0, 0.0, 0.0, 0.0, 0);
+  private PidGains driveGains = new PidGains(DRIVE_PROFILE, 0.0, 0.0, 0.0, 0.0, 0);
+  private PidGains rotationGains = new PidGains(ROTATION_PROFILE, 0.0, 0.0, 0.0, 0.0, 0);
 
   public BobTalonFX leftLead = new BobTalonFX(1);
   public BobTalonFX leftFollow = new BobTalonFX(2);
@@ -66,7 +66,7 @@ public class Drivetrain extends SubsystemBase {
     rightFollow.configOpenloopRamp(0.25);
   }
 
-  public void configGains(PhoenixGains gains) {
+  public void configGains(PidGains gains) {
     this.leftLead.setGains(gains);
     this.rightLead.setGains(gains);
     rightLead.configMaxIntegralAccumulator(ROTATION_PROFILE, 3000);

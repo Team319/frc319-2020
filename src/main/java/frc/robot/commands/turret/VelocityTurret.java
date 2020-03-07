@@ -5,37 +5,39 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.autos;
+package frc.robot.commands.turret;
 
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 
-public class AutoDriveTime extends CommandBase {
-  private double driveSeconds = 0;
-  private Timer timer = new Timer();
+public class VelocityTurret extends CommandBase {
+  private double setpoint;
 
-  public AutoDriveTime() {
+  public VelocityTurret(double velocity) {
+    addRequirements(Robot.turret);
+    this.setpoint = velocity;
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    driveSeconds = SmartDashboard.getNumber("Auto Drive Time", 1);
-    timer.reset();
-    timer.start();
   }
 
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    Robot.turret.setVelocity(setpoint);
   }
 
+  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
   }
 
+  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    boolean hasTimeElapsed = timer.get() >= driveSeconds;
-    return hasTimeElapsed;
+    return false;
   }
 }

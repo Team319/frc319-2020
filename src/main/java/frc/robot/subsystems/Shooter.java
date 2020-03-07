@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.models.BobTalonFX;
 import frc.robot.models.MotionParameters;
-import frc.robot.models.PhoenixGains;
+import frc.robot.models.PidGains;
 
 public class Shooter extends SubsystemBase {
   double currentVelocity;
@@ -23,7 +23,7 @@ public class Shooter extends SubsystemBase {
   private BobTalonFX shooterLead = new BobTalonFX(6);
   private BobTalonFX shooterFollow = new BobTalonFX(7);
 
-  private final PhoenixGains shooterGains = new PhoenixGains(0, 0.05, 0.001, 0.7, 0.0504, 150);
+  private final PidGains shooterGains = new PidGains(0, 0.05, 0.001, 0.7, 0.0504, 150);
   private MotionParameters shooterMotionParameters = new MotionParameters(0, 0, shooterGains);
 
   /**
