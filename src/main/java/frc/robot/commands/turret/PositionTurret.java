@@ -11,13 +11,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 public class PositionTurret extends CommandBase {
-  double position;
+  double setpoint;
 
   /**
    * Creates a new PositionTurret.
    */
   public PositionTurret(double position) {
     addRequirements(Robot.turret);
+    this.setpoint = position;
+
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -29,7 +31,7 @@ public class PositionTurret extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.turret.set(position);
+    Robot.turret.set(setpoint);
   }
 
   // Called once the command ends or is interrupted.

@@ -1,20 +1,28 @@
 package frc.robot.models;
 
+import com.revrobotics.ControlType;
+
 public class MotionParameters {
 	private int _acceleration = 0;
 	private int _cruiseVelocity = 0;
-	private PhoenixGains _gains = new PhoenixGains(0, 0, 0, 0, 0, 0);
+	private int _minVelocity = 0;
+	private PidGains _gains = new PidGains(0, 0, 0, 0, 0, 0);
 
-	public MotionParameters(int acceleration, int cruiseVelocity, PhoenixGains gains) {
+	public MotionParameters(int acceleration, int cruiseVelocity, PidGains gains) {
 		_acceleration = acceleration;
 		_cruiseVelocity = cruiseVelocity;
 		_gains = gains;
 	}
 
+	public MotionParameters(int acceleration, int cruiseVelocity, PidGains gains, int minVelocity) {
+		this(acceleration, cruiseVelocity, gains);
+		_minVelocity = minVelocity;
+	}
+
 	public MotionParameters() {
 	}
 
-	public PhoenixGains getGains() {
+	public PidGains getGains() {
 		return _gains;
 	}
 
@@ -26,7 +34,11 @@ public class MotionParameters {
 		return _cruiseVelocity;
 	}
 
-	public void setFXGains(PhoenixGains gains) {
+	public int getMinVelocity() {
+		return _minVelocity;
+	}
+
+	public void setGains(PidGains gains) {
 		_gains = gains;
 	}
 
@@ -36,6 +48,10 @@ public class MotionParameters {
 
 	public void setCruiseVelocity(int cruiseVelocity) {
 		_cruiseVelocity = cruiseVelocity;
+	}
+
+	public void setMinVelocity(int minVelocity) {
+		_minVelocity = minVelocity;
 	}
 
 }
