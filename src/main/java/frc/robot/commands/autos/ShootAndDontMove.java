@@ -14,6 +14,6 @@ import frc.robot.commands.shooter.ShootCommand;
 
 public class ShootAndDontMove extends SequentialCommandGroup {
   public ShootAndDontMove() {
-    addCommands(new AutoDriveTime(), new ShootCommand(0.53), new WaitCommand(5), new StopShooting());
+    addCommands(new AutoDelay(), new ShootCommand(0.53), new WaitCommand(3), new StopShooting());
   }
 }

@@ -8,11 +8,11 @@
 package frc.robot.commands.limelight;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.drivetrain.SetDriveMode;
-import frc.robot.models.DriveMode;
+import frc.robot.commands.robot.SetRobotMode;
+import frc.robot.models.RobotMode;
 
 public class StartLimelightMode extends ParallelCommandGroup {
   public StartLimelightMode() {
-    addCommands(new SetDriveMode(DriveMode.Limelight), new TurnLedsOn());
+    addCommands(new SetRobotMode(RobotMode.Limelight), new TurnLedsOn());
   }
 }

@@ -20,6 +20,7 @@ import frc.robot.commands.robot.StopShooting;
 import frc.robot.commands.robot.StopUnjam;
 import frc.robot.commands.robot.Unjam;
 import frc.robot.commands.shooter.ShootCommand;
+import frc.robot.commands.turret.ResetTurret;
 import frc.robot.controllers.BobXboxController;
 import frc.robot.models.RobotMode;
 
@@ -28,11 +29,11 @@ public class OI {
     public BobXboxController operatorController;
 
     public OI() {
-        driverController = new BobXboxController(0, 0.2, 0.2);
+        driverController = new BobXboxController(0, 0.1, 0.2);
         operatorController = new BobXboxController(1, 0.2, 0.2);
 
         // Driver Controls
-        driverController.rightTriggerButton.whenPressed(new ShootCommand(0.55));
+        driverController.rightTriggerButton.whenPressed(new ShootCommand(0.65));
         driverController.rightTriggerButton.whenReleased(new StopShooting());
 
         driverController.leftTriggerButton.whenPressed(new StartLimelightMode());
@@ -51,12 +52,14 @@ public class OI {
         operatorController.rightTriggerButton.whenPressed(new CollectorStopCollect());
 
         operatorController.startButton.whenPressed(new SetRobotMode(RobotMode.Climb));
+        // operatorController.selectButton.whenPressed(new ResetTurret());
 
         operatorController.bButton.whenPressed(new Unjam());
         operatorController.bButton.whenReleased(new StopUnjam());
 
         operatorController.aButton.whenPressed(new Preload());
         operatorController.aButton.whenReleased(new StopPreload());
+
     }
 
 }

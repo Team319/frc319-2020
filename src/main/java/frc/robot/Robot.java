@@ -12,10 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.autos.BasicShootAuto;
-import frc.robot.commands.autos.DoNothing;
-import frc.robot.commands.autos.ShootAndDontMove;
-import frc.robot.commands.autos.ShootAndPushAuto;
+import frc.robot.commands.autos.*;
 import frc.robot.commands.drivetrain.BobDrive;
 import frc.robot.models.RobotMode;
 import frc.robot.subsystems.Climber;
@@ -73,12 +70,14 @@ public class Robot extends TimedRobot {
 
     autoChooser = new SendableChooser<Command>();
     autoChooser.setDefaultOption("Do Nothing", new DoNothing());
-    // autoChooser.addOption("Sneaky Pete", "SneakyPete");
-    // autoChooser.addOption("Off Line", "DriveForwardFiveFeet");
+    autoChooser.addOption("Off Line", new DriveForwardFiveFeet());
     autoChooser.addOption("Litteraly Just Shoot Thank You", new ShootAndDontMove());
-    autoChooser.setDefaultOption("Shoot And Move", new BasicShootAuto());
+    autoChooser.addOption("Shoot And Move", new BasicShootAuto());
     autoChooser.addOption("Shoot and Push", new ShootAndPushAuto());
-
+    autoChooser.addOption("Trench Run", new TrenchRunAuto());
+    autoChooser.addOption("Sneaky Pete", new SneakyPeteAuto());
+    autoChooser.addOption("Generator Snatch", new GeneratorSnatchAuto());
+    autoChooser.addOption("Generator Trench", new GenTrenchAuto());
     SmartDashboard.putData("Autonomous Chooser", autoChooser);
 
     limelight.setLedModeOff();

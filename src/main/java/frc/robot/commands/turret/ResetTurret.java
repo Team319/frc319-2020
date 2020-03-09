@@ -5,15 +5,22 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.robot;
+package frc.robot.commands.turret;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.collector.CollectIn;
-import frc.robot.commands.serializer.SerializeIn;
-import frc.robot.commands.tower.TowerUp;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.Robot;
 
-public class FeedShooter extends ParallelCommandGroup {
-  public FeedShooter() {
-    addCommands(new CollectIn(0.8), new SerializeIn(1), new TowerUp(-1));
+public class ResetTurret extends InstantCommand {
+  /**
+   * Creates a new ResetTurret.
+   */
+  public ResetTurret() {
+    // Use addRequirements() here to declare subsystem dependencies.
+  }
+
+  @Override
+  public void initialize() {
+    Robot.turret.resetPosition(0);
   }
 }

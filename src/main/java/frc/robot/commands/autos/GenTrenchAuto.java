@@ -8,11 +8,16 @@
 package frc.robot.commands.autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.paths.DriveForwardFiveFeetPath;
+import frc.paths.GenTrenchPArt2;
+import frc.paths.GenTrenchPart1;
 import frc.robot.commands.FollowPath;
+import frc.robot.commands.collector.CollectIn;
+import frc.robot.commands.collector.CollectorStartCollect;
+import frc.robot.commands.shooter.ShootCommand;
 
-public class DriveForwardFiveFeet extends SequentialCommandGroup {
-  public DriveForwardFiveFeet() {
-    addCommands(new FollowPath(new DriveForwardFiveFeetPath()));
+public class GenTrenchAuto extends SequentialCommandGroup {
+  public GenTrenchAuto() {
+    addCommands(new ShootAndDontMove(), new CollectorStartCollect(), new FollowPath(new GenTrenchPart1()),
+        new CollectIn(0), new FollowPath(new GenTrenchPArt2()), new ShootCommand(0.53));
   }
 }

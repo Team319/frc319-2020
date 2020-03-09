@@ -8,11 +8,16 @@
 package frc.robot.commands.autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.paths.DriveForwardFiveFeetPath;
+import frc.paths.SneakyPetePart2;
 import frc.robot.commands.FollowPath;
+import frc.robot.commands.collector.CollectIn;
+import frc.robot.commands.collector.CollectorStartCollect;
+import frc.robot.commands.shooter.ShootCommand;
+import frc.robot.paths.SneakyPete;
 
-public class DriveForwardFiveFeet extends SequentialCommandGroup {
-  public DriveForwardFiveFeet() {
-    addCommands(new FollowPath(new DriveForwardFiveFeetPath()));
+public class SneakyPeteAuto extends SequentialCommandGroup {
+  public SneakyPeteAuto() {
+    addCommands(new CollectorStartCollect(), new FollowPath(new SneakyPete()), new CollectIn(0),
+        new FollowPath(new SneakyPetePart2()), new ShootCommand(0));
   }
 }

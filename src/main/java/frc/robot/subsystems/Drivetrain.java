@@ -95,6 +95,7 @@ public class Drivetrain extends SubsystemBase {
   public void teleopDrive() {
     double rotateValue = 0.0;
     double moveValue = 0.0;
+    double turnMultiplier = 0.5;
     boolean quickTurn = false;
 
     moveValue = -Robot.oi.driverController.leftStick.getY();
@@ -102,7 +103,7 @@ public class Drivetrain extends SubsystemBase {
 
     if (this.mode == DriveMode.Normal) {
       rotateValue = Robot.oi.driverController.rightStick.getX();
-      rotateValue = HelperFunctions.signedSquare(rotateValue);
+      rotateValue = HelperFunctions.signedSquare(rotateValue) * turnMultiplier;
     } else if (this.mode == DriveMode.Limelight) {
       rotateValue = -limelightRotatePID.calculate(Robot.limelight.getXProportional());
       rotateValue = HelperFunctions.limit(rotateValue, -0.25, 0.25);
@@ -122,5 +123,9 @@ public class Drivetrain extends SubsystemBase {
     this.rightLead.set(controlMode, percentOutput);
     this.rightFollow.set(controlMode, percentOutput);
 
+  }
+
+  public double getDistance() {
+    return rightLead.getSelectedSensorPosition();
   }
 }
