@@ -5,21 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.drivetrain;
+package frc.robot.commands.turret;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
-import frc.robot.models.DriveMode;
 
-public class SetDriveMode extends InstantCommand {
-  private DriveMode driveMode = DriveMode.Normal;
+public class SetTurretAngle extends InstantCommand {
+  private double setpoint;
 
-  public SetDriveMode(DriveMode driveMode) {
-    this.driveMode = driveMode;
+  public SetTurretAngle(double degrees) {
+    this.setpoint = degrees;
   }
 
   @Override
   public void initialize() {
-    Robot.drivetrain.setMode(driveMode);
+    Robot.turret.setAngle(setpoint);
   }
 }

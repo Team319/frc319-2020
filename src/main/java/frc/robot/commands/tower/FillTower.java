@@ -5,16 +5,17 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.autos;
+package frc.robot.commands.tower;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 
-public class SneakyPete extends CommandBase {
+public class FillTower extends CommandBase {
   /**
-   * Creates a new SneakyPete.
+   * Creates a new FillTower.
    */
-  public SneakyPete() {
-    // Use addRequirements() here to declare subsystem dependencies.
+  public FillTower() {
+    addRequirements(Robot.tower);
   }
 
   // Called when the command is initially scheduled.
@@ -25,6 +26,7 @@ public class SneakyPete extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    Robot.tower.fillTower();
   }
 
   // Called once the command ends or is interrupted.

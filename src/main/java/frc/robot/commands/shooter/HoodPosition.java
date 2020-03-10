@@ -17,26 +17,21 @@ public class HoodPosition extends CommandBase {
   public HoodPosition(double setpoint) {
     addRequirements(Robot.shooter);
     // this.hoodSetpoint = setpoint;
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     // Robot.shooter.setHood(hoodSetpoint);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(final boolean interrupted) {
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

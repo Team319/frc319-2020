@@ -5,22 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.models;
+package frc.robot.utils;
 
-public interface IPositionControlledSubsystem {
+import com.team319.trajectory.Path;
+import com.team319.trajectory.Path.SegmentValue;
 
-    public int targetPosition = 0;
-    public int onTargetThreshold = 0;
+/**
+ * Add your docs here.
+ */
+public class PathTranslator {
+    private Path prof;
 
-    public boolean setTargetPosition(int targetPosition);
+    public PathTranslator(Path pathToTranslate) {
+        this.prof = pathToTranslate;
 
-    public int getTargetPosition();
+    }
 
-    public int getCurrentPosition();
-
-    public double getCurrentVelocity();
-
-    public void motionMagicControl();
-
-    public boolean isInPosition(int targetPosition);
+    public double getCenterPosition(int index) {
+        return prof.getValue(index, SegmentValue.CENTER_POSITION);
+    }
 }

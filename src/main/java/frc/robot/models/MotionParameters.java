@@ -1,7 +1,5 @@
 package frc.robot.models;
 
-import com.revrobotics.ControlType;
-
 public class MotionParameters {
 	private int _acceleration = 0;
 	private int _cruiseVelocity = 0;

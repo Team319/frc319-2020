@@ -21,10 +21,8 @@ public class SpinShooter extends InstantCommand {
     addRequirements(Robot.shooter);
     this.shooterSetpoint = setpoint;
     this.controlMode = controlMode;
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     Robot.shooter.set(controlMode, shooterSetpoint);

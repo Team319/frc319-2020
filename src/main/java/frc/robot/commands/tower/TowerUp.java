@@ -17,10 +17,8 @@ public class TowerUp extends InstantCommand {
   public TowerUp(double setpoint) {
     addRequirements(Robot.tower);
     this.towerSetpoint = -setpoint;
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     Robot.tower.set(towerSetpoint);

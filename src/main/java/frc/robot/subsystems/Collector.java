@@ -21,9 +21,6 @@ public class Collector extends SubsystemBase {
   private CANSparkMax collectorFollow = new CANSparkMax(15, MotorType.kBrushless);
   private DoubleSolenoid collectorSolenoid = new DoubleSolenoid(1, 0, 1);
 
-  /**
-   * Creates a new Collector.
-   */
   public Collector() {
     collectorLead.setSmartCurrentLimit(25);
     collectorLead.setSmartCurrentLimit(25);
@@ -43,7 +40,6 @@ public class Collector extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putBoolean("Collecting", collecting);
-    // This method will be called once per scheduler run
   }
 
   public void setCollector(double setpoint) {

@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.models.BobTalonFX;
 import frc.robot.models.MotionParameters;
@@ -26,9 +25,6 @@ public class Shooter extends SubsystemBase {
   private final PidGains shooterGains = new PidGains(0, 0.05, 0.001, 0.7, 0.0504, 150);
   private MotionParameters shooterMotionParameters = new MotionParameters(0, 0, shooterGains);
 
-  /**
-   * Creates a new Shooter.
-   */
   public Shooter() {
 
     this.shooterLead.setInverted(true);

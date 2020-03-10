@@ -13,32 +13,24 @@ import frc.robot.Robot;
 public class PercentTurret extends CommandBase {
   private double setpoint;
 
-  /**
-   * Creates a new PercentTurret.
-   */
   public PercentTurret(double percent) {
     addRequirements(Robot.turret);
     this.setpoint = percent;
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     Robot.turret.setPercentOutput(setpoint);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

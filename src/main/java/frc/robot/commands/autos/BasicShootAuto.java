@@ -13,16 +13,8 @@ import frc.robot.commands.drivetrain.DriveCommand;
 import frc.robot.commands.robot.StopShooting;
 import frc.robot.commands.shooter.ShootCommand;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class BasicShootAuto extends SequentialCommandGroup {
-  /**
-   * Creates a new BasicShootAuto.
-   */
   public BasicShootAuto() {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());
     addCommands(new AutoDriveTime(), new ShootCommand(0.5), new WaitCommand(3), new StopShooting(),
         new DriveCommand(0.15), new AutoDriveTime(), new DriveCommand(0));
   }

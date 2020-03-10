@@ -5,15 +5,16 @@ import com.ctre.phoenix.motion.SetValueMotionProfile;
 import com.ctre.phoenix.motion.TrajectoryPoint;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FollowerType;
+import com.team319.trajectory.Path;
+import com.team319.trajectory.Path.SegmentValue;
+
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.models.BobTalonFX;
-import frc.robot.models.SrxMotionProfile;
-import frc.robot.models.SrxTrajectory;
 import frc.robot.subsystems.Drivetrain;
 
-public class FollowArc extends CommandBase {
+public class FollowPath extends CommandBase {
 
     private BobTalonFX rightTalon = Robot.drivetrain.rightLead;
     private BobTalonFX leftTalon = Robot.drivetrain.leftLead;
@@ -25,7 +26,7 @@ public class FollowArc extends CommandBase {
 
     private boolean isFinished = false;
 
-    private SrxTrajectory trajectoryToFollow = null;
+    private Path pathToFollow = null;
 
     private MotionProfileStatus status = new MotionProfileStatus();
 
@@ -41,11 +42,11 @@ public class FollowArc extends CommandBase {
     private class BufferLoader implements java.lang.Runnable {
         private int lastPointSent = 0;
         private BobTalonFX talon;
-        private SrxMotionProfile prof;
+        private Path prof;
         private final boolean flipped;
         private double startPosition = 0;
 
-        public BufferLoader(BobTalonFX rightTalon, SrxMotionProfile prof, boolean flipped, double startPosition) {
+        public BufferLoader(BobTalonFX rightTalon, Path prof, boolean flipped, double startPosition) {
             this.talon = rightTalon;
             this.prof = prof;
             this.flipped = flipped;
@@ -55,22 +56,23 @@ public class FollowArc extends CommandBase {
         public void run() {
             talon.processMotionProfileBuffer();
 
-            if (lastPointSent >= prof.numPoints) {
+            if (lastPointSent >= prof.getSegmentCount()) {
                 return;
             }
 
-            if (!talon.isMotionProfileTopLevelBufferFull() && lastPointSent < prof.numPoints) {
+            if (!talon.isMotionProfileTopLevelBufferFull() && lastPointSent < prof.getSegmentCount()) {
                 TrajectoryPoint point = new TrajectoryPoint();
                 /* for each point, fill our structure and pass it to API */
-                point.position = prof.points[lastPointSent][0] + startPosition;
-                point.velocity = prof.points[lastPointSent][1];
-                point.timeDur = 10;
-                point.auxiliaryPos = (flipped ? -1 : 1) * 10 * (prof.points[lastPointSent][3]);
+                point.position = prof.getValue(lastPointSent, SegmentValue.CENTER_POSITION) + startPosition;
+                point.velocity = prof.getValue(lastPointSent, SegmentValue.CENTER_VELOCITY);
+                point.timeDur = (int) (prof.getValue(lastPointSent, SegmentValue.TIME_STAMP) * 1000);
+                point.auxiliaryPos = (flipped ? -1 : 1) * 10
+                        * Math.toDegrees(prof.getValue(lastPointSent, SegmentValue.HEADING));
                 point.profileSlotSelect0 = distancePidSlot;
                 point.profileSlotSelect1 = rotationPidSlot;
                 point.zeroPos = false;
                 point.isLastPoint = false;
-                if ((lastPointSent + 1) == prof.numPoints) {
+                if ((lastPointSent + 1) == prof.getSegmentCount()) {
                     point.isLastPoint = true; /** set this to true on the last point */
                 }
 
@@ -84,9 +86,9 @@ public class FollowArc extends CommandBase {
     // Runs the runnable
     private Notifier loadLeftBuffer;
 
-    public FollowArc(SrxTrajectory trajectoryToFollow) {
+    public FollowPath(Path pathToFollow) {
         addRequirements(Robot.drivetrain);
-        this.trajectoryToFollow = trajectoryToFollow;
+        this.pathToFollow = pathToFollow;
     }
 
     // Called just before this Command runs the first time
@@ -100,8 +102,8 @@ public class FollowArc extends CommandBase {
         rightTalon.set(ControlMode.MotionProfileArc, setValue.value);
         leftTalon.follow(rightTalon, FollowerType.AuxOutput1);
 
-        loadLeftBuffer = new Notifier(new BufferLoader(rightTalon, trajectoryToFollow.centerProfile,
-                trajectoryToFollow.flipped, Robot.drivetrain.getDistance()));
+        loadLeftBuffer = new Notifier(
+                new BufferLoader(rightTalon, pathToFollow, false, Robot.drivetrain.getDistance()));
 
         loadLeftBuffer.startPeriodic(.005);
     }

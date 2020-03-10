@@ -5,21 +5,22 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.drivetrain;
+package frc.robot.commands.turret;
 
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
-import frc.robot.models.DriveMode;
 
-public class SetDriveMode extends InstantCommand {
-  private DriveMode driveMode = DriveMode.Normal;
-
-  public SetDriveMode(DriveMode driveMode) {
-    this.driveMode = driveMode;
+public class ResetTurret extends InstantCommand {
+  /**
+   * Creates a new ResetTurret.
+   */
+  public ResetTurret() {
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   @Override
   public void initialize() {
-    Robot.drivetrain.setMode(driveMode);
+    Robot.turret.resetPosition(0);
   }
 }

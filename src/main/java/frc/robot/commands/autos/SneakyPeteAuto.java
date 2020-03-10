@@ -5,15 +5,19 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.collector;
+package frc.robot.commands.autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.oi.RumbleDriverController;
-import frc.robot.commands.oi.RumbleOperatorController;
+import frc.paths.SneakyPetePart2;
+import frc.robot.commands.FollowPath;
+import frc.robot.commands.collector.CollectIn;
+import frc.robot.commands.collector.CollectorStartCollect;
+import frc.robot.commands.shooter.ShootCommand;
+import frc.robot.paths.SneakyPete;
 
-public class CollectorStopCollect extends SequentialCommandGroup {
-  public CollectorStopCollect() {
-    addCommands(new RumbleDriverController(0.0), new RumbleOperatorController(0.0), new CollectIn(0),
-        new CollectorRetract());
+public class SneakyPeteAuto extends SequentialCommandGroup {
+  public SneakyPeteAuto() {
+    addCommands(new CollectorStartCollect(), new FollowPath(new SneakyPete()), new CollectIn(0),
+        new FollowPath(new SneakyPetePart2()), new ShootCommand(0));
   }
 }

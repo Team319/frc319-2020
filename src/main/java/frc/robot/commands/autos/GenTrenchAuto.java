@@ -8,14 +8,16 @@
 package frc.robot.commands.autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.drivetrain.DriveCommand;
-import frc.robot.commands.robot.StopShooting;
+import frc.paths.GenTrenchPArt2;
+import frc.paths.GenTrenchPart1;
+import frc.robot.commands.FollowPath;
+import frc.robot.commands.collector.CollectIn;
+import frc.robot.commands.collector.CollectorStartCollect;
 import frc.robot.commands.shooter.ShootCommand;
 
-public class ShootAndPushAuto extends SequentialCommandGroup {
-  public ShootAndPushAuto() {
-    addCommands(new ShootCommand(0.50), new WaitCommand(3), new StopShooting(), new DriveCommand(-0.25),
-        new WaitCommand(2), new DriveCommand(0.15), new WaitCommand(2), new DriveCommand(0));
+public class GenTrenchAuto extends SequentialCommandGroup {
+  public GenTrenchAuto() {
+    addCommands(new ShootAndDontMove(), new CollectorStartCollect(), new FollowPath(new GenTrenchPart1()),
+        new CollectIn(0), new FollowPath(new GenTrenchPArt2()), new ShootCommand(0.53));
   }
 }

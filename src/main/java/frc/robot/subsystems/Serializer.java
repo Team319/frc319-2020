@@ -16,9 +16,6 @@ public class Serializer extends SubsystemBase {
   private CANSparkMax serializerLead = new CANSparkMax(11, MotorType.kBrushless);
   private CANSparkMax serializerFollow = new CANSparkMax(12, MotorType.kBrushless);
 
-  /**
-   * Creates a new Serializer.
-   */
   public Serializer() {
     serializerLead.setInverted(false);
     serializerFollow.setInverted(true);

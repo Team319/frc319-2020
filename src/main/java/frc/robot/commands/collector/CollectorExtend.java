@@ -11,15 +11,10 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
 
 public class CollectorExtend extends InstantCommand {
-  /**
-   * Creates a new CollectorExtend.
-   */
   public CollectorExtend() {
     addRequirements(Robot.collector);
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     Robot.collector.collectorExtend();

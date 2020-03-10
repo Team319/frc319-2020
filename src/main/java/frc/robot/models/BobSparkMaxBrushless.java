@@ -7,20 +7,20 @@
 
 package frc.robot.models;
 
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANError;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 
-/**
- * Add your docs here.
- */
 public class BobSparkMaxBrushless extends CANSparkMax {
     private CANPIDController _pidController;
+    private CANEncoder encoder;
 
     public BobSparkMaxBrushless(int deviceNumber) {
         super(deviceNumber, MotorType.kBrushless);
         _pidController = this.getPIDController();
+        encoder = this.getEncoder();
     }
 
     public void set(double setpoint, ControlType controlType) {
@@ -77,5 +77,13 @@ public class BobSparkMaxBrushless extends CANSparkMax {
 
     public void selectProfileSlot(int slotIdx) {
         this.selectProfileSlot(slotIdx);
+    }
+
+    public void setPosition(double position) {
+        this.encoder.setPosition(position);
+    }
+
+    public double getPosition() {
+        return encoder.getPosition();
     }
 }
